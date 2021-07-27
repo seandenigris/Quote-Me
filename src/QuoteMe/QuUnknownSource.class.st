@@ -1,27 +1,33 @@
 Class {
-	#name : #QuUnknownReference,
+	#name : #QuUnknownSource,
 	#superclass : #Object,
 	#instVars : [
 		'authors'
 	],
-	#category : 'QuoteMe-Core'
+	#category : #'QuoteMe-Core'
 }
 
 { #category : #'as yet unclassified' }
-QuUnknownReference class >> by: authorCollection [
+QuUnknownSource class >> by: authorCollection [
 
 	^ self new setAuthors: authorCollection.
 	
 ]
 
 { #category : #accessing }
-QuUnknownReference >> authors [
+QuUnknownSource >> author: person [
+
+	authors := OrderedCollection with: person
+]
+
+{ #category : #accessing }
+QuUnknownSource >> authors [
 
 	^ authors ifNil: [ authors := OrderedCollection new ]
 ]
 
 { #category : #'as yet unclassified' }
-QuUnknownReference >> printOn: aStream [
+QuUnknownSource >> printOn: aStream [
 	self authors
 		do: [ :e | aStream nextPutAll: e fullName ]
 		separatedBy: [ aStream nextPutAll: ', ' ].
@@ -30,7 +36,7 @@ QuUnknownReference >> printOn: aStream [
 ]
 
 { #category : #private }
-QuUnknownReference >> setAuthors: authorsCollection [
+QuUnknownSource >> setAuthors: authorsCollection [
 
 	authors := authorsCollection.
 	^ self.

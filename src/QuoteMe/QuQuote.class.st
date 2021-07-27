@@ -61,11 +61,18 @@ QuQuote class >> spData [
 
 { #category : #'instance creation' }
 QuQuote class >> that: person said: aString [
-
+	| source citation |
+	source := QuUnknownSource new author: PeGtSpotterResult; yourself.
+	citation := QuCitation new source: source; yourself.
 	^ self new
 		content: aString;
-		citation: person;
+		citation: citation;
 		yourself.
+]
+
+{ #category : #accessing }
+QuQuote >> author: aPerson [
+	self citation source author: aPerson
 ]
 
 { #category : #accessing }
@@ -81,7 +88,7 @@ QuQuote >> authors [
 
 { #category : #accessing }
 QuQuote >> citation [
-	"'A citation is a reference to a... source' (http://en.wikipedia.org/wiki/Citation). We experiemented with many other names for this message. #source didn't work because e.g. when a page number is required, that page number doesn't seem to be part of the 'source'. #reference seemed too generic, as it could mean either the source itself or a mention of it"
+	"'A citation is a reference to a... source' (http://en.wikipedia.org/wiki/Citation). We experimented with many other names for this message. #source didn't work because e.g. when a page number is required, that page number doesn't seem to be part of the 'source'. #reference seemed too generic, as it could mean either the source itself or a mention of it"
 
 	^ citation
 ]
@@ -110,7 +117,7 @@ QuQuote >> descriptionCitation [
 		accessor: #citation;
 		label: 'Citation';
 		priority: 200;
-		classes: (QuCitation allSubclasses add: QuUnknownReference; yourself); 
+		classes: (QuCitation allSubclasses add: QuUnknownSource; yourself); 
 		yourself
 ]
 
