@@ -45,5 +45,5 @@ QuCitation >> sources [
 
 { #category : #viewing }
 QuCitation >> view [
-	LivingLibrary uniqueInstance view: self source.
+	LlLibrary uniqueInstance view: self source.
 ]

@@ -18,12 +18,10 @@ QuPageCitation class >> citing: aWork page: aNumber [
 { #category : #accessing }
 QuPageCitation class >> example [
 	<gtExample>
-	| book author citation |
-	book := LlBook new
-		author: MpPerson exampleNassimTaleb;
-		yourself.
+	
+	| citation |
 	citation := QuPageCitation new
-		source: book;
+		source: LlAuthoredWork exampleAntifragile;
 		page: 18;
 		yourself.
 	citation parenthetical should equal: '(Taleb, p. 18)'.
