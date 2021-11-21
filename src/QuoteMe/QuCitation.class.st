@@ -5,7 +5,8 @@ Class {
 	#name : #QuCitation,
 	#superclass : #Object,
 	#instVars : [
-		'source'
+		'source',
+		'location'
 	],
 	#category : #'QuoteMe-Core'
 }
@@ -26,6 +27,16 @@ QuCitation >> descriptionSource [
 		priority: 100;
 		classes: LlAuthoredWork withAllSubclasses; 
 		yourself
+]
+
+{ #category : #accessing }
+QuCitation >> location [
+	^ location
+]
+
+{ #category : #accessing }
+QuCitation >> location: aLocation [
+	location := aLocation
 ]
 
 { #category : #accessing }

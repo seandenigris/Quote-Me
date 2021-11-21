@@ -30,6 +30,15 @@ QuSecondaryCitation >> primarySource: anObject [
 ]
 
 { #category : #accessing }
+QuSecondaryCitation >> printOn: aStream [
+
+	aStream
+		print: primarySource;
+		nextPutAll: ' via ';
+		print: source
+]
+
+{ #category : #accessing }
 QuSecondaryCitation >> sources [
 	^ { self source. self primarySource }
 ]
