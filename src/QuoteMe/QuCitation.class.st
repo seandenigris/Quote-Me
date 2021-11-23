@@ -56,5 +56,14 @@ QuCitation >> sources [
 
 { #category : #viewing }
 QuCitation >> view [
-	LlLibrary uniqueInstance view: self source.
+	self source view.
+]
+
+{ #category : #accessing }
+QuCitation >> viewDescription [
+	<magritteActionDescription>
+	^ MAActionDescription new
+		gtIcon: BrGlamorousVectorIcons playinspect;
+		action: #view;
+		yourself
 ]
