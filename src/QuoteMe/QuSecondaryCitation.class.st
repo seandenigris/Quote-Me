@@ -15,7 +15,8 @@ QuSecondaryCitation >> descriptionPrimarySource [
 		accessor: #primarySource;
 		label: 'Primary Source';
 		priority: 200;
-		classes: LlAuthoredWork withAllSubclasses; 
+		classes: QuCitation withAllSubclasses; 
+		comment: 'Primary source is itself a citation because it has its own location';
 		yourself
 ]
 
