@@ -40,6 +40,16 @@ QuCitation >> location: aLocation [
 ]
 
 { #category : #accessing }
+QuCitation >> printOn: aStream [
+
+	source ifNotNil: [ aStream print: source ].
+	location ifNotNil: [ 
+		aStream
+			space;
+			print: location ].
+]
+
+{ #category : #accessing }
 QuCitation >> source [
 	^ source
 ]
