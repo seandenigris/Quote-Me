@@ -4,6 +4,11 @@ Class {
 	#category : #BaselineOfQuoteMe
 }
 
+{ #category : #testing }
+BaselineOfQuoteMe class >> isDynabook [
+	^ true
+]
+
 { #category : #baseline }
 BaselineOfQuoteMe >> baseline: spec [
 	<baseline>
