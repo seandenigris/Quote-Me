@@ -17,18 +17,6 @@ QuCitation >> authors [
 	^ self source authors.
 ]
 
-{ #category : #magritte }
-QuCitation >> descriptionSource [
-	<magritteDescription>
-	
-	^ MAToOneRelationDescription new
-		accessor: #source;
-		label: 'Source';
-		priority: 100;
-		classes: LlAuthoredWork withAllSubclasses; 
-		yourself
-]
-
 { #category : #accessing }
 QuCitation >> location [
 	^ location
@@ -57,6 +45,18 @@ QuCitation >> source [
 { #category : #accessing }
 QuCitation >> source: anObject [
 	source := anObject
+]
+
+{ #category : #magritte }
+QuCitation >> sourceDescription [
+	<magritteDescription>
+	
+	^ MAToOneRelationDescription new
+		accessor: #source;
+		label: 'Source';
+		priority: 100;
+		classes: LlAuthoredWork withAllSubclasses; 
+		yourself
 ]
 
 { #category : #accessing }
