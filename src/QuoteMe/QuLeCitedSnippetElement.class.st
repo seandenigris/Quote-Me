@@ -52,9 +52,12 @@ QuLeCitedSnippetElement >> newSearchButton [
 				
 			aSpotterModel announcer
 				when: GtSpotterActOn
-				do: [ :e | 
-					(#(singleClick doubleClick keyPressed) includes: e eventType)
-						ifTrue: [ Halt now. buttonAptitude hide ] ].
+				do: [ :evt | 
+					self snippetViewModel snippetModel sourceID: 'evt element'.
+					evt actedUpon: true.
+					(#(buttonClick singleClick doubleClick keyPressed) includes: evt eventType)
+						ifTrue: [ buttonAptitude hide ].
+					"aStep exit from #gtSpotterActDefault:from:" ].
 					
 			aptitude := BrGlamorousDropdownAptitude new
 				handle: handleButton;
