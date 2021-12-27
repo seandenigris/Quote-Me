@@ -45,6 +45,13 @@ QuLeCitedTextSnippet >> contentAsString [
 ]
 
 { #category : #accessing }
+QuLeCitedTextSnippet >> source [
+	self sourceID ifNil: [ ^ nil ].
+	
+	^ LlLibrary uniqueInstance works detect: [ :e | e uuid = self sourceID ]
+]
+
+{ #category : #accessing }
 QuLeCitedTextSnippet >> sourceID [
 	^ sourceID
 ]

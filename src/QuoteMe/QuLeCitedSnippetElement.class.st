@@ -21,9 +21,9 @@ QuLeCitedSnippetElement >> initialize [
 		vFitContent.
 		
 	sourceLabel := BrLabel new
-			aptitude: BrGlamorousLabelAptitude;
-			beSmallSize;
-			text: 'Chief Officer'.
+		aptitude: BrGlamorousLabelAptitude;
+		beSmallSize;
+		text: ''.
 		
 	snippetToolbar
 		addChild: (BrLabel new
@@ -53,7 +53,8 @@ QuLeCitedSnippetElement >> newSearchButton [
 			aSpotterModel announcer
 				when: GtSpotterActOn
 				do: [ :evt | 
-					self snippetViewModel snippetModel sourceID: 'evt element'.
+					self snippetViewModel snippetModel sourceID: evt element ensureUUID.
+					self onSourceChanged.
 					evt actedUpon: true.
 					(#(buttonClick singleClick doubleClick keyPressed) includes: evt eventType)
 						ifTrue: [ buttonAptitude hide ].
@@ -83,6 +84,17 @@ QuLeCitedSnippetElement >> newSearchButton [
 		yourself
 		
 	"Adapted from GtSpotterElementExamples>>#elementOnSpotterInDropdown"
+]
+
+{ #category : #accessing }
+QuLeCitedSnippetElement >> onSnippetViewModelChanged [
+	self onSourceChanged.
+	super onSnippetViewModelChanged.
+]
+
+{ #category : #accessing }
+QuLeCitedSnippetElement >> onSourceChanged [
+	sourceLabel text: self snippetViewModel sourceDisplayText.
 ]
 
 { #category : #accessing }
