@@ -23,6 +23,10 @@ QuLeCitedSnippetElement >> initialize [
 	sourceLabel := BrLabel new
 		aptitude: BrGlamorousLabelAptitude;
 		beSmallSize;
+		addEventHandlerOn: BlClickEvent
+			do: [ :evt | 
+				self snippetViewModel snippetModel source 
+					ifNotNil: [ :src | evt target phlow spawnObject: src ] ];
 		text: ''.
 		
 	snippetToolbar

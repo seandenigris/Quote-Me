@@ -61,6 +61,16 @@ QuLeCitedTextSnippet class >> sourceProviders: anObject [
 ]
 
 { #category : #accessing }
+QuLeCitedTextSnippet >> addedToParent: aParent [
+	super addedToParent: aParent.
+	self
+		previousSnippetDo: [ :prevSnip |
+			(prevSnip isKindOf: QuLeCitedTextSnippet) ifFalse: [ ^ self  ].
+			prevSnip source ifNotNil: [ :src | self sourceID: src uuid ] ]
+		ifNone: []
+]
+
+{ #category : #accessing }
 QuLeCitedTextSnippet >> asSnippetViewModel [
 	<return: #LeSnippetViewModel>
 	^ QuLeCitedSnippetViewModel new snippetModel: self
