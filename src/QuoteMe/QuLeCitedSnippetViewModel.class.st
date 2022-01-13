@@ -10,6 +10,12 @@ QuLeCitedSnippetViewModel >> snippetElementClass [
 ]
 
 { #category : #accessing }
+QuLeCitedSnippetViewModel >> snippetView [
+
+	^ QuLeCitedSnippetView new snippetElementClass: self snippetElementClass
+]
+
+{ #category : #accessing }
 QuLeCitedSnippetViewModel >> sourceDisplayText [
 	self snippetModel source ifNil: [ ^ '' asRopedText ].
 	^ self snippetModel source title asRopedText.
