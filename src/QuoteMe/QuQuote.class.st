@@ -72,7 +72,10 @@ QuQuote class >> that: person said: aString [
 
 { #category : #accessing }
 QuQuote >> author: aPerson [
-	self citation source author: aPerson
+	self shouldBeImplemented.
+	"self citation source author: aPerson
+	
+	It's not necessarily right to alter the source. What about multi-authored works?"
 ]
 
 { #category : #accessing }
