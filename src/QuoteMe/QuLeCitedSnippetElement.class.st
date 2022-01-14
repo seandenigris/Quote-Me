@@ -41,53 +41,17 @@ QuLeCitedSnippetElement >> initialize [
 { #category : #accessing }
 QuLeCitedSnippetElement >> newSearchButton [
 
-	| buttonAptitude |
-	
-	buttonAptitude := BrGlamorousWithDropdownAptitude
-		stencil: [ | aSpotterElement aSpotterModel handleButton aptitude |
-			aSpotterElement := GtSpotterElement new.
-			aSpotterModel := self snippetViewModel snippetModel sourceSpotter.
-			handleButton := BrButton new
-				aptitude: BrGlamorousButtonWithIconAptitude 
-					- BrGlamorousButtonWithLabelTooltipAptitude
-						- BrGlamorousButtonExteriorAptitude;
-				icon: BrGlamorousVectorIcons search;
-				yourself.
-				
-			aSpotterModel announcer
+	^ GtSpotterDropdownButtonStencil new
+		valuable: [ self snippetViewModel snippetModel ];
+		icon: BrGlamorousVectorIcons search;
+		spotterModelDo: [ :sm |
+			sm announcer
 				when: GtSpotterActOn
 				do: [ :evt | 
 					self snippetViewModel snippetModel sourceID: evt element ensureUUID.
 					self onSourceChanged.
-					evt actedUpon: true.
-					(#(buttonClick singleClick doubleClick keyPressed) includes: evt eventType)
-						ifTrue: [ buttonAptitude hide ].
-					"aStep exit from #gtSpotterActDefault:from:" ].
-					
-			aptitude := BrGlamorousDropdownAptitude new
-				handle: handleButton;
-				content:
-					(aSpotterElement
-						spotterModel: aSpotterModel;
-						constraintsDo: [ :c | 
-							c horizontal exact: 600.
-							c vertical exact: 400 ];
-						yourself);
-				yourself.
-			
-			BlElement new
-				aptitude: aptitude;
-				background: BrGlamorousColors secondaryHeaderBackgroundColor;
-				yourself ].
-								
-	^ BrButton new
-		aptitude:
-			BrGlamorousButtonWithIconAptitude
-				+ buttonAptitude;
-		icon: BrGlamorousVectorIcons search;
-		yourself
-		
-	"Adapted from GtSpotterElementExamples>>#elementOnSpotterInDropdown"
+					evt actedUpon: true. ] ];
+		create
 ]
 
 { #category : #accessing }
