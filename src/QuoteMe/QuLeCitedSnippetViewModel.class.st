@@ -18,5 +18,5 @@ QuLeCitedSnippetViewModel >> snippetView [
 { #category : #accessing }
 QuLeCitedSnippetViewModel >> sourceDisplayText [
 	self snippetModel source ifNil: [ ^ '' asRopedText ].
-	^ self snippetModel source title asRopedText.
+	^ self snippetModel source gtDisplayText.
 ]
