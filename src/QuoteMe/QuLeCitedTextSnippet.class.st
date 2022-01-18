@@ -77,11 +77,6 @@ QuLeCitedTextSnippet >> asSnippetViewModel [
 ]
 
 { #category : #accessing }
-QuLeCitedTextSnippet >> contentAsString [
-	^ super contentAsString
-]
-
-{ #category : #accessing }
 QuLeCitedTextSnippet >> detectSourceWithUuid: aString ifFound: foundBlock ifNone: noneBlock [
 
 	self class sourceProviders do: [ :pro |
