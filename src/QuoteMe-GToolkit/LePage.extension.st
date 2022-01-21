@@ -1,13 +1,10 @@
 Extension { #name : #LePage }
 
 { #category : #'*QuoteMe-GToolkit' }
-LePage class >> quTranscriptOwnerID: aUID [
+LePage class >> quTranscriptOwner: anObject [
 	| result type |
 	result := self new.
-	type := QuLeTransciptPageType new 
-		modelID: aUID;
-		page: result; 
-		yourself.
+	type := QuLeTransciptPageType model: anObject page: result.
 	^ result
 		type: type;
 		yourself

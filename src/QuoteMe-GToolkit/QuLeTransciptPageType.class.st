@@ -1,22 +1,21 @@
+"
+The problem with creating an instance is that a particular model object may not know how to create a reference to itself. In fact, it probably doesn't. An Event, for example, might live in a log, but what log? And we can't hardcode the assumptions of the library about where events live because another library using the first may make different assumptions.
+
+Thus, we provide a class-side map for libraries to configure how to construct a reference for a particular class. The configuration can be edited via {{gtMethod:QuLeTransciptPageType class>>#modelReferenceForClass:builder:}}
+"
 Class {
 	#name : #QuLeTransciptPageType,
 	#superclass : #LePageType,
 	#instVars : [
-		'modelID'
+		'modelID',
+		'modelReference'
 	],
 	#classVars : [
-		'ModelReferenceBuilder'
+		'ModelReferenceBuilder',
+		'ModelReferenceBuilderMap'
 	],
 	#category : #'QuoteMe-GToolkit-Transcripts-Lepiter'
 }
-
-{ #category : #'instance creation' }
-QuLeTransciptPageType class >> eventID: aUUID page: aLePage [
-
-	^ self new 
-		modelID: aUUID;
-		page: aLePage 
-]
 
 { #category : #examples }
 QuLeTransciptPageType class >> example [
@@ -38,35 +37,21 @@ QuLeTransciptPageType class >> exampleEmptyPage [
 	model stub uuid willReturn: 1.
 	model stub participants willReturn: #('Jack' 'Jill').
 	model stub transcript willReturn: transcript.
-	page := LePage quTranscriptOwnerID: model ensureUUID.
-	LeDatabase new addPage: page.
-	page type stub modelReference willReturn: (MADummyObjectUIDReferenceForTesting new
+	self modelReferenceBuilderMap at: Object put: [MADummyObjectUIDReferenceForTesting new
 		object: model;
 		uid: model uuid;
-		yourself).
+		yourself ].
+	[ 
+		page := LePage quTranscriptOwner: model.
+	] ensure: [ self modelReferenceBuilderMap removeKey: Object ].
+	LeDatabase new addPage: page.
 	^ page
-]
-
-{ #category : #accessing }
-QuLeTransciptPageType class >> leJsonV3AttributeMapping [
-
-	^ super leJsonV3AttributeMapping
-		add: (#modelID -> #modelID);
-		yourself
-
-]
-
-{ #category : #accessing }
-QuLeTransciptPageType class >> leJsonV3Name [
-
-	^ 'ppEventPage'
 ]
 
 { #category : #accessing }
 QuLeTransciptPageType class >> leJsonV4AttributeMapping [
 
 	^ super leJsonV4AttributeMapping
-		add: (#modelID -> #modelID);
 		add: (#modelReference -> #modelReference);
 		yourself
 
@@ -76,6 +61,16 @@ QuLeTransciptPageType class >> leJsonV4AttributeMapping [
 QuLeTransciptPageType class >> leJsonV4Name [
 
 	^ 'ppEventPage'
+]
+
+{ #category : #'instance creation' }
+QuLeTransciptPageType class >> model: anObject page: aLePage [
+	| referenceBuilder |
+	referenceBuilder := self modelReferenceBuilderMap at: anObject class.
+	^ QuLeTransciptPageType new
+		modelReference: referenceBuilder value;
+		page: aLePage;
+		yourself.
 ]
 
 { #category : #accessing }
@@ -89,6 +84,23 @@ QuLeTransciptPageType class >> modelReferenceBuilder: aValuable [
 	ModelReferenceBuilder := aValuable
 ]
 
+{ #category : #accessing }
+QuLeTransciptPageType class >> modelReferenceBuilderMap [
+
+	^ ModelReferenceBuilderMap ifNil: [ ModelReferenceBuilderMap := Dictionary new ]
+]
+
+{ #category : #accessing }
+QuLeTransciptPageType class >> modelReferenceBuilderMap: anObject [
+
+	^ ModelReferenceBuilderMap := anObject
+]
+
+{ #category : #accessing }
+QuLeTransciptPageType class >> modelReferenceForClass: aClass builder: aValuable [
+	^ self modelReferenceBuilderMap at: aClass put: aValuable
+]
+
 { #category : #comparing }
 QuLeTransciptPageType >> = anObject [
 	"Answer whether the receiver and anObject represent the same page type."
@@ -97,7 +109,7 @@ QuLeTransciptPageType >> = anObject [
 		ifTrue: [ ^ true ].
 	self class = anObject class
 		ifFalse: [ ^ false ].
-	^ self modelID = anObject modelID
+	^ self modelReference = anObject modelReference
 ]
 
 { #category : #accessing }
@@ -111,7 +123,7 @@ QuLeTransciptPageType >> databaseKey [
 QuLeTransciptPageType >> hash [
 	"Answer an integer value that is related to the identity of the receiver."
 
-	^ self modelID hash
+	^ self modelReference hash
 ]
 
 { #category : #'api - testing' }
@@ -121,14 +133,14 @@ QuLeTransciptPageType >> isPpEventPageType [
 
 { #category : #accessing }
 QuLeTransciptPageType >> model [
-	self modelID ifNil: [ ^ nil ].
+	self modelReference ifNil: [ ^ nil ].
 	^ self modelReference object
 ]
 
 { #category : #accessing }
 QuLeTransciptPageType >> modelID [
 
-	^ modelID
+	^ self modelReference uid
 ]
 
 { #category : #accessing }
@@ -140,9 +152,13 @@ QuLeTransciptPageType >> modelID: anObject [
 { #category : #accessing }
 QuLeTransciptPageType >> modelReference [
 
-	^ self class modelReferenceBuilder value
-		uid: self modelID;
-		yourself
+	^ modelReference
+]
+
+{ #category : #accessing }
+QuLeTransciptPageType >> modelReference: anMAObjectUIDReference [
+
+	modelReference := anMAObjectUIDReference
 ]
 
 { #category : #printing }
