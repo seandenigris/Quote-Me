@@ -47,7 +47,7 @@ QuCitation >> source: anObject [
 	source := anObject
 ]
 
-{ #category : #magritte }
+{ #category : #accessing }
 QuCitation >> sourceDescription [
 	<magritteDescription>
 	
@@ -55,7 +55,6 @@ QuCitation >> sourceDescription [
 		accessor: #source;
 		label: 'Source';
 		priority: 100;
-		classes: LlAuthoredWork withAllSubclasses; 
 		yourself
 ]
 

@@ -1,19 +1,34 @@
 Class {
 	#name : #QuLeSources,
 	#superclass : #Object,
-	#category : #'QuoteMe-GToolkit'
+	#classVars : [
+		'Providers'
+	],
+	#category : #'QuoteMe-GToolkit-Citation-Lepiter'
 }
 
 { #category : #accessing }
+QuLeSources class >> providers [
+
+	^ Providers
+]
+
+{ #category : #accessing }
+QuLeSources class >> providers: anObject [
+
+	Providers := anObject
+]
+
+{ #category : #accessing }
 QuLeSources >> children [
-	^ { PpEventLog uniqueInstance. LlLibrary uniqueInstance }
+	^ self providers collect: #model
 ]
 
 { #category : #accessing }
 QuLeSources >> detectUuid: aString ifFound: foundBlock ifNone: noneBlock [
 
-	{ PpEventLog uniqueInstance events. LlLibrary uniqueInstance works } do: [ :col |
-		col 
+	self providers do: [ :p |
+		p sourceCollection 
 			detect: [ :e | e uuid = aString ] 
 			ifFound: [ :e | ^ foundBlock cull: e ]
 			ifNone: [ ] ].
@@ -30,5 +45,5 @@ QuLeSources >> gtSpotterProcessorsFor: aSpotterStep [
 
 { #category : #accessing }
 QuLeSources >> providers [
-	^ { PpEventLog uniqueInstance. LlLibrary uniqueInstance }
+	^ self class providers
 ]

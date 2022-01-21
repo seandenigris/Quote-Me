@@ -12,5 +12,5 @@ QuoteMeDB class >> backupDirectoryParent [
 { #category : #'override in subclasses' }
 QuoteMeDB class >> schema [
 
-	^ { QuQuote. LivingLibraryDB }
+	^ { QuQuote }
 ]

@@ -7,7 +7,7 @@ Class {
 	#classVars : [
 		'SourceProviders'
 	],
-	#category : #'QuoteMe-GToolkit'
+	#category : #'QuoteMe-GToolkit-Citation-Lepiter'
 }
 
 { #category : #adding }

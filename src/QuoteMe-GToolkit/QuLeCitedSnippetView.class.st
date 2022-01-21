@@ -1,7 +1,7 @@
 Class {
 	#name : #QuLeCitedSnippetView,
 	#superclass : #LeSnippetView,
-	#category : #'QuoteMe-GToolkit'
+	#category : #'QuoteMe-GToolkit-Citation-Lepiter'
 }
 
 { #category : #accessing }

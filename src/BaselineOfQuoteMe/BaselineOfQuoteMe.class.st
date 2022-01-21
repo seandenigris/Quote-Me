@@ -15,8 +15,6 @@ BaselineOfQuoteMe >> baseline: spec [
 
 	spec for: #'common' do: [
 		spec 
-			baseline: 'LivingLibrary' with: [
-				spec repository: 'github://seandenigris/Living-Library' ];
 			baseline: 'Mocketry' with: [
 				spec repository: 'github://dionisiydk/Mocketry' ];
 			baseline: 'PharoEnhancements' with: [
@@ -24,6 +22,6 @@ BaselineOfQuoteMe >> baseline: spec [
 			baseline: 'SimplePersistence' with: [
 				spec repository: 'github://seandenigris/Simple-Persistence' ].
 		spec package: 'QuoteMe' with: [
-				spec requires: #('LivingLibrary' 'Mocketry' 'PharoEnhancements' 'SimplePersistence'). ]. ].
+				spec requires: #('Mocketry' 'PharoEnhancements' 'SimplePersistence'). ]. ].
 
 ]

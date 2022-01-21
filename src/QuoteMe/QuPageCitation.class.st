@@ -19,9 +19,11 @@ QuPageCitation class >> citing: aWork page: aNumber [
 QuPageCitation class >> example [
 	<gtExample>
 	
-	| citation |
+	| citation source |
+	source := Mock new.
+	source stub author willReturn: MpPerson exampleNassimTaleb.
 	citation := QuPageCitation new
-		source: LlAuthoredWork exampleAntifragile;
+		source: source;
 		page: 18;
 		yourself.
 	citation parenthetical should equal: '(Taleb, p. 18)'.

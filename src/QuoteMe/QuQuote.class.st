@@ -27,26 +27,6 @@ QuQuote class >> db [
 	^ db ifNil: [ db := OrderedCollection new ].
 ]
 
-{ #category : #examples }
-QuQuote class >> exampleAddToDB [
-
-		| content work citation quote |
-	content := 'Unfortunately, [hydraulic forcible entry tools] are mechanical and mechanical tools break down. The firefighter must always know how to use the basic forcible entry tools, the axe and the Halligan Tool, to gain entry'.
-	work := LlAuthoredWork new 
-		title: 'FDNY FORCIBLE ENTRY REFERENCE GUIDE: TECHNIQUES AND PROCEDURES';
-		yourself.
-	citation := QuPageCitation new
-		work: work;
-		page: 16;
-		yourself.
-
-	quote := QuQuote new
-		content: content;
-		citation: citation.
-		
-	QuQuote db add: quote.
-]
-
 { #category : #'instance creation' }
 QuQuote class >> restoreFrom: aCollection [
 
