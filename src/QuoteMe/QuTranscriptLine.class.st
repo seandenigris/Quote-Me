@@ -51,7 +51,13 @@ QuTranscriptLine >> printOn: aStream [
 { #category : #accessing }
 QuTranscriptLine >> snippet [
 
-	^ self lepiterDatabase blockWithUID: self contentSnippetID
+	LeDatabasesRegistry defaultPrimaryDatabase blockWithUID: self contentSnippetID ifPresent: [ :s | ^ s ] ifAbsent: [ ].
+	
+	"Should never get here during normal use, but useful for e.g. testing"
+	LeDatabase allSubInstances do: [ :db |
+		db blockWithUID: self contentSnippetID ifPresent: [  :s | ^ s ] ifAbsent: [ ]  ].
+		
+	^ nil
 ]
 
 { #category : #accessing }
