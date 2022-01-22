@@ -51,6 +51,8 @@ QuTranscriptLine >> printOn: aStream [
 { #category : #accessing }
 QuTranscriptLine >> snippet [
 
+	self contentSnippetID ifNil: [ ^ nil ].
+
 	LeDatabasesRegistry defaultPrimaryDatabase blockWithUID: self contentSnippetID ifPresent: [ :s | ^ s ] ifAbsent: [ ].
 	
 	"Should never get here during normal use, but useful for e.g. testing"
