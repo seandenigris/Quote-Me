@@ -22,11 +22,6 @@ QuTranscriptLine >> contentSnippetID: aUUID [
 ]
 
 { #category : #accessing }
-QuTranscriptLine >> lepiterDatabase [
-	^ LeDatabasesRegistry defaultPrimaryDatabase
-]
-
-{ #category : #accessing }
 QuTranscriptLine >> position [
 
 	^ position
