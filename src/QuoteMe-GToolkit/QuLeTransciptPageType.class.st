@@ -53,7 +53,6 @@ QuLeTransciptPageType class >> leJsonV4AttributeMapping [
 	^ super leJsonV4AttributeMapping
 		add: (#modelReference -> #modelReference);
 		yourself
-
 ]
 
 { #category : #accessing }
