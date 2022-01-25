@@ -22,16 +22,19 @@ QuTranscript >> gtViewLinesFor: aView [
 { #category : #accessing }
 QuTranscript >> lepiterPage [
 
-	self pageID ifNil: [ ^ nil ].
+	self pageID ifNil: [ 
+		| result |
+		result := LeDatabasesRegistry defaultPrimaryDatabase addPage: self newLepiterPage.
+		self pageID: result uid.
+		^ result ].
 
-	LeDatabasesRegistry defaultPrimaryDatabase blockWithUID: self pageID ifPresent: [ :s | ^ s ] ifAbsent: [ ].
+	LeDatabasesRegistry defaultPrimaryDatabase pageWithID: self pageID ifPresent: [ :s | ^ s ] ifAbsent: [ ].
 	
 	"Should never get here during normal use, but useful for e.g. testing"
 	LeDatabase allSubInstances do: [ :db |
-		db blockWithUID: self pageID ifPresent: [  :s | ^ s ] ifAbsent: [ ]  ].
+		db pageWithID: self pageID ifPresent: [  :s | ^ s ] ifAbsent: [ ]  ].
 		
-	LeDatabasesRegistry defaultPrimaryDatabase addPage: self newLepiterPage.
-	
+	^ nil
 ]
 
 { #category : #accessing }

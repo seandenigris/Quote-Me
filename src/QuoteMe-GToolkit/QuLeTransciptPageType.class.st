@@ -7,7 +7,6 @@ Class {
 	#name : #QuLeTransciptPageType,
 	#superclass : #LePageType,
 	#instVars : [
-		'modelID',
 		'modelReference'
 	],
 	#classVars : [
@@ -60,28 +59,20 @@ QuLeTransciptPageType class >> leJsonV4AttributeMapping [
 { #category : #accessing }
 QuLeTransciptPageType class >> leJsonV4Name [
 
-	^ 'ppEventPage'
+	^ 'quTranscriptPage'
 ]
 
 { #category : #'instance creation' }
 QuLeTransciptPageType class >> model: anObject page: aLePage [
-	| referenceBuilder |
+	| referenceBuilder reference |
 	referenceBuilder := self modelReferenceBuilderMap at: anObject class.
+	reference := referenceBuilder value
+		uid: anObject ensureUUID;
+		yourself.
 	^ QuLeTransciptPageType new
-		modelReference: referenceBuilder value;
+		modelReference: reference;
 		page: aLePage;
 		yourself.
-]
-
-{ #category : #accessing }
-QuLeTransciptPageType class >> modelReferenceBuilder [
-	^ ModelReferenceBuilder
-]
-
-{ #category : #accessing }
-QuLeTransciptPageType class >> modelReferenceBuilder: aValuable [
-	"aValuable - returns anMAObjectUIDReference"
-	ModelReferenceBuilder := aValuable
 ]
 
 { #category : #accessing }
@@ -109,7 +100,7 @@ QuLeTransciptPageType >> = anObject [
 		ifTrue: [ ^ true ].
 	self class = anObject class
 		ifFalse: [ ^ false ].
-	^ self modelReference = anObject modelReference
+	^ self modelID = anObject modelID
 ]
 
 { #category : #accessing }
@@ -123,11 +114,11 @@ QuLeTransciptPageType >> databaseKey [
 QuLeTransciptPageType >> hash [
 	"Answer an integer value that is related to the identity of the receiver."
 
-	^ self modelReference hash
+	^ self modelID hash
 ]
 
 { #category : #'api - testing' }
-QuLeTransciptPageType >> isPpEventPageType [
+QuLeTransciptPageType >> isQuTranscriptPageType [
 	^ true
 ]
 
@@ -140,13 +131,7 @@ QuLeTransciptPageType >> model [
 { #category : #accessing }
 QuLeTransciptPageType >> modelID [
 
-	^ self modelReference uid
-]
-
-{ #category : #accessing }
-QuLeTransciptPageType >> modelID: anObject [
-
-	modelID := anObject
+	^ self modelReference ifNotNil: [ :ref | ref uid ]
 ]
 
 { #category : #accessing }
@@ -165,7 +150,7 @@ QuLeTransciptPageType >> modelReference: anMAObjectUIDReference [
 QuLeTransciptPageType >> printOn: aStream [
 
 	aStream
-		<< 'PpEvent Page: ';
+		<< 'QuTranscript Page: ';
 		<< (self model ifNotNil: #printString ifNil: [ '<none>' ])
 ]
 
@@ -181,5 +166,5 @@ QuLeTransciptPageType >> title [
 
 	^ self model 
 		ifNotNil: #displayString
-		ifNil: [ 'PpEvent Page' ]
+		ifNil: [ 'QuTranscript Page' ]
 ]

@@ -46,7 +46,7 @@ QuLeTranscriptLineSnippet class >> leJsonV4AttributeMapping [
 { #category : #accessing }
 QuLeTranscriptLineSnippet class >> leJsonV4Name [
 
-	^ 'ppTranscriptLineSnippet'
+	^ 'quTranscriptLineSnippet'
 ]
 
 { #category : #accessing }
