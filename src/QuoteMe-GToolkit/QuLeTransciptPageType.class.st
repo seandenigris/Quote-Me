@@ -145,6 +145,18 @@ QuLeTransciptPageType >> modelReference: anMAObjectUIDReference [
 	modelReference := anMAObjectUIDReference
 ]
 
+{ #category : #accessing }
+QuLeTransciptPageType >> peCustomizePageToolContentTreeElement: aLePageToolContentElement [
+
+	| button |
+	button := BrButton new 
+		aptitude: BrGlamorousButtonWithIconAptitude;
+		label: 'Save';
+		icon: BrGlamorousVectorIcons play;
+		action: [ self model view ].
+	aLePageToolContentElement headerElement addItem: button
+]
+
 { #category : #printing }
 QuLeTransciptPageType >> printOn: aStream [
 
