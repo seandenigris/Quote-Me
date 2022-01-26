@@ -7,7 +7,8 @@ Class {
 	#name : #QuLeTransciptPageType,
 	#superclass : #LePageType,
 	#instVars : [
-		'modelReference'
+		'modelReference',
+		'player'
 	],
 	#classVars : [
 		'ModelReferenceBuilder',
@@ -148,13 +149,26 @@ QuLeTransciptPageType >> modelReference: anMAObjectUIDReference [
 { #category : #accessing }
 QuLeTransciptPageType >> peCustomizePageToolContentTreeElement: aLePageToolContentElement [
 
-	| button |
-	button := BrButton new 
-		aptitude: BrGlamorousButtonWithIconAptitude;
-		label: 'Save';
-		icon: BrGlamorousVectorIcons play;
-		action: [ self model view ].
-	aLePageToolContentElement headerElement addItem: button
+	| playerWidget |
+	
+	aLePageToolContentElement userData 
+		at: #player 
+		put: self player.
+	
+	aLePageToolContentElement headerElement 
+		childNamed: #peHeader
+		ifFound: [ ^ self ]
+		ifNone: [].
+		
+	self model isPlayable ifFalse: [ ^ self ].
+	
+	playerWidget := LlMediaPlayerElement on: (aLePageToolContentElement userData at: #player).
+	aLePageToolContentElement headerElement addChild: playerWidget as: #peHeader
+]
+
+{ #category : #accessing }
+QuLeTransciptPageType >> player [
+	^ player ifNil: [ player := self model newPlayer ]
 ]
 
 { #category : #printing }
@@ -163,6 +177,12 @@ QuLeTransciptPageType >> printOn: aStream [
 	aStream
 		<< 'QuTranscript Page: ';
 		<< (self model ifNotNil: #printString ifNil: [ '<none>' ])
+]
+
+{ #category : #accessing }
+QuLeTransciptPageType >> resetPlayer [
+
+	player := nil
 ]
 
 { #category : #accessing }
