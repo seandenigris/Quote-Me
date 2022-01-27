@@ -7,7 +7,7 @@ Class {
 { #category : #accessing }
 QuLeTranscriptLineSnippetViewModel >> positionDisplayText [
 	^ self snippetModel line position
-		ifNotNil: [ :obj | obj asTime print24 gtDisplayText ]
+		ifNotNil: [ :obj | obj quTranscriptPositionGtDisplayText ]
 		ifNil: [ '' asRopedText ]
 ]
 
