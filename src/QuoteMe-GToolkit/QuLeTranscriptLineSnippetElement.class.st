@@ -3,58 +3,58 @@ Class {
 	#superclass : #LeTextCoderSnippetElement,
 	#instVars : [
 		'snippetToolbar',
-		'sourceLabel',
 		'speakerLabel',
-		'speakerChooser',
-		'positionLabel'
+		'positionLabel',
+		'snippetContent'
 	],
 	#category : #'QuoteMe-GToolkit-Transcripts-Lepiter'
 }
 
 { #category : #accessing }
+QuLeTranscriptLineSnippetElement >> controlNames [
+	^#(#speakerChooser #timeChooser)
+]
+
+{ #category : #accessing }
+QuLeTranscriptLineSnippetElement >> hideControls [
+	snippetContent ifNil: [ ^ self ].
+	self controlNames do: [ :cName | (snippetContent childNamed: cName) visibility: BlVisibility gone ].
+]
+
+{ #category : #accessing }
 QuLeTranscriptLineSnippetElement >> initialize [
 
 	super initialize.
-	
-	snippetToolbar := BrHorizontalPane new
-		hMatchParent;
-		padding: (BlInsets top: 4 bottom: 4);
-		alignCenterLeft;
-		cellSpacing: 5;
-		vFitContent.
 		
-	sourceLabel := BrLabel new
-		aptitude: BrGlamorousLabelAptitude;
-		beSmallSize;
-		addEventHandlerOn: BlClickEvent
-			do: [ :evt | 
-				self snippetViewModel snippetModel source 
-					ifNotNil: [ :src | evt target phlow spawnObject: src ] ];
-		text: ''.
-		
-	snippetToolbar
-		addChild: (BrEditor new
-		aptitude: BrGlamorousEditorAptitude new;
-			text: 'Source:');
-		addChild: sourceLabel;
-		addChild: self newSearchButton
+	self addAptitude: (BrStyleCommonAptitude new
+		when: BlElementState focused | BlElementState hovered
+			style: [ :aStyle |
+				aStyle
+					do: [ self showControls ]
+					after: [ self hideControls ]]).
 ]
 
 { #category : #accessing }
 QuLeTranscriptLineSnippetElement >> newSearchButton [
 
 	^ GtSpotterDropdownButtonStencil new
-		valuable: [ self snippetViewModel snippetModel page type model participants ];
+		valuable: [ self snippet page type model participants ];
 		icon: BrGlamorousVectorIcons search;
 		spotterModelDo: [ :sm |
 			sm announcer
 				when: GtSpotterActOn
 				do: [ :evt | 
-					self snippetViewModel snippetModel line speaker: evt element.
+					self snippet line speaker: evt element.
 					self onSnippetViewModelChanged.
 					evt actedUpon: true.
 					self editorElement requestFocus ] ];
 		create
+]
+
+{ #category : #accessing }
+QuLeTranscriptLineSnippetElement >> onPositionClicked: evt [
+	self snippet line position ifNotNil: [ :pos | 
+		self snippet page type player currentPosition: pos ]
 ]
 
 { #category : #accessing }
@@ -74,34 +74,59 @@ QuLeTranscriptLineSnippetElement >> onSnippetViewModelFocused: aBoolean [
 ]
 
 { #category : #accessing }
+QuLeTranscriptLineSnippetElement >> showControls [
+	snippetContent ifNil: [ ^ self ].
+	self controlNames do: [ :cName | (snippetContent childNamed: cName) visibility: BlVisibility visible ]
+]
+
+{ #category : #accessing }
 QuLeTranscriptLineSnippetElement >> snippetContent [
-	| result |
-	result := BrHorizontalPane new
+	| timeChooser speakerChooser |
+	snippetContent := BrHorizontalPane new
 		hMatchParent;
 		padding: (BlInsets top: 4 bottom: 4);
 		alignCenterLeft;
 		cellSpacing: 5;
 		vFitContent.
 		
+	timeChooser := BrButton new 
+		aptitude: BrGlamorousButtonWithIconAptitude; 
+		icon: BrGlamorousVectorIcons performance; 
+		"tooltip: 'Set position to current';" 
+		action: [ 
+			self snippet line position: self snippet page type player currentPosition.
+			self onSnippetViewModelChanged ];
+		yourself.
+		
 	positionLabel := BrLabel new
 		aptitude: BrGlamorousLabelAptitude new;
+		addEventHandlerOn: BlClickEvent
+			do: [ :evt | self onPositionClicked: evt ];
 		yourself.
-	
+
 	speakerChooser := self newSearchButton
 		"addShortcut: Character space asShortcut;"
 		yourself.
 		
-	speakerLabel := BrEditor new 
-		aptitude: BrGlamorousEditorAptitude new;
+	speakerLabel := BrLabel new
+		aptitude: BrGlamorousLabelAptitude;
+		addEventHandlerOn: BlClickEvent
+			do: [ :evt | 
+				self snippet line speaker 
+					ifNotNil: [ :src | evt target phlow spawnObject: src ] ];
 		hFitContent;
 		vFitContent.
 	
-	^ result
+	snippetContent
+		addChild: timeChooser as: #timeChooser;
 		addChild: positionLabel;
-		addChild: speakerChooser;
+		addChild: speakerChooser as: #speakerChooser;
 		addChild: speakerLabel;
-		addChild: self editorElement;
-		yourself
+		addChild: self editorElement.
+		
+	self hideControls.
+	
+	^ snippetContent
 ]
 
 { #category : #accessing }

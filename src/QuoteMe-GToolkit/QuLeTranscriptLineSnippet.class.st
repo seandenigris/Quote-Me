@@ -60,7 +60,7 @@ QuLeTranscriptLineSnippet >> gtViewLineFor: aView [
 	self line ifNil: [ ^ aView empty ].
 	^ aView forward
 		title: 'Line';
-		priority: 2;
+		priority: 0.5;
 		object: [ self line ];
 		view: #gtRawFor:
 ]
@@ -68,14 +68,9 @@ QuLeTranscriptLineSnippet >> gtViewLineFor: aView [
 { #category : #accessing }
 QuLeTranscriptLineSnippet >> line [
 
-	^ self model transcript lines
+	^ self transcriptable transcript lines
 		detect: [ :e | e contentSnippetID = self uid ] 
 		ifNone: [ nil ]
-]
-
-{ #category : #accessing }
-QuLeTranscriptLineSnippet >> model [
-	^ self page type model
 ]
 
 { #category : #accessing }
@@ -100,6 +95,16 @@ QuLeTranscriptLineSnippet >> parent: anObject [
 ]
 
 { #category : #accessing }
+QuLeTranscriptLineSnippet >> play [
+	^ self page type player currentPosition: self line position
+]
+
+{ #category : #accessing }
 QuLeTranscriptLineSnippet >> speaker: aPerson [
 	self line speaker: aPerson
+]
+
+{ #category : #accessing }
+QuLeTranscriptLineSnippet >> transcriptable [
+	^ self page type model
 ]
