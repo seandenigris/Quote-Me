@@ -80,12 +80,23 @@ QuLeTranscriptLineSnippet >> model [
 
 { #category : #accessing }
 QuLeTranscriptLineSnippet >> parent: anObject [
+	| newLine |
+	anObject ifNil: [ 
+		"Removed snippet from page"
+		Halt now.
+		self transcriptable transcript lines remove: self line.
+		^ self ].
+
 	super parent: anObject.
+	
 	self line ifNotNil: [ ^ self ].
-	self page type model transcript lines add: (QuTranscriptLine new
+	
+	newLine := QuTranscriptLine new
 		contentSnippetID: self uid;
-		position: DateAndTime now;
-		yourself).
+		position: self page type player currentPosition;
+		yourself.
+	self transcriptable participants size = 1 ifTrue: [ newLine speaker: self transcriptable participants first ].
+	self transcriptable transcript lines add: newLine.
 ]
 
 { #category : #accessing }
