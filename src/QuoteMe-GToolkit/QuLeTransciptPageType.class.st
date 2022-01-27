@@ -148,22 +148,20 @@ QuLeTransciptPageType >> modelReference: anMAObjectUIDReference [
 
 { #category : #accessing }
 QuLeTransciptPageType >> peCustomizePageToolContentTreeElement: aLePageToolContentElement [
+	"Sent from LePageToolContentTreeElement>>#onPageViewModelChanged"
 
 	| playerWidget |
 	
-	aLePageToolContentElement userData 
-		at: #player 
-		put: self player.
+	self model isPlayable ifFalse: [ ^ super peCustomizePageToolContentTreeElement: aLePageToolContentElement ].
 	
 	aLePageToolContentElement headerElement 
 		childNamed: #peHeader
-		ifFound: [ ^ self ]
-		ifNone: [].
-		
-	self model isPlayable ifFalse: [ ^ self ].
-	
-	playerWidget := LlMediaPlayerElement on: (aLePageToolContentElement userData at: #player).
-	aLePageToolContentElement headerElement addChild: playerWidget as: #peHeader
+		ifFound: [ :playerElement |
+			playerElement player: self player.
+			^ self ]
+		ifNone: [
+			playerWidget := LlMediaPlayerElement on: self player.
+			aLePageToolContentElement headerElement addChild: playerWidget as: #peHeader ].
 ]
 
 { #category : #accessing }
