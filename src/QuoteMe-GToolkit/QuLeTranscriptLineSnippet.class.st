@@ -65,6 +65,22 @@ QuLeTranscriptLineSnippet >> gtViewLineFor: aView [
 		view: #gtRawFor:
 ]
 
+{ #category : #initialization }
+QuLeTranscriptLineSnippet >> initializeLine [
+
+	| newLine player |
+	newLine := QuTranscriptLine new
+		contentSnippetID: self uid;
+		yourself.
+		
+	player := self page type player.
+	player isRunning ifTrue: [ newLine position: player currentPosition ].
+	
+	self transcriptable participants size = 1 ifTrue: [ 
+		newLine speaker: self transcriptable participants first ].
+	self transcriptable transcript lines add: newLine
+]
+
 { #category : #accessing }
 QuLeTranscriptLineSnippet >> line [
 
@@ -75,23 +91,13 @@ QuLeTranscriptLineSnippet >> line [
 
 { #category : #accessing }
 QuLeTranscriptLineSnippet >> parent: anObject [
-	| newLine |
+
 	anObject ifNil: [ 
 		"Removed snippet from page"
-		Halt now.
 		self transcriptable transcript lines remove: self line.
 		^ self ].
-
 	super parent: anObject.
-	
-	self line ifNotNil: [ ^ self ].
-	
-	newLine := QuTranscriptLine new
-		contentSnippetID: self uid;
-		position: self page type player currentPosition;
-		yourself.
-	self transcriptable participants size = 1 ifTrue: [ newLine speaker: self transcriptable participants first ].
-	self transcriptable transcript lines add: newLine.
+	self line ifNil: [ self initializeLine ].
 ]
 
 { #category : #accessing }
