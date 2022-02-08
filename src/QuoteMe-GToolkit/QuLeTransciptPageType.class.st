@@ -7,8 +7,7 @@ Class {
 	#name : #QuLeTransciptPageType,
 	#superclass : #LePageType,
 	#instVars : [
-		'modelReference',
-		'player'
+		'modelReference'
 	],
 	#classVars : [
 		'ModelReferenceBuilder',
@@ -147,6 +146,11 @@ QuLeTransciptPageType >> modelReference: anMAObjectUIDReference [
 ]
 
 { #category : #accessing }
+QuLeTransciptPageType >> newPlayer [
+	^ self model newPlayer
+]
+
+{ #category : #accessing }
 QuLeTransciptPageType >> peCustomizePageToolContentTreeElement: aLePageToolContentElement [
 	"Sent from LePageToolContentTreeElement>>#onPageViewModelChanged"
 
@@ -157,16 +161,12 @@ QuLeTransciptPageType >> peCustomizePageToolContentTreeElement: aLePageToolConte
 	aLePageToolContentElement headerElement 
 		childNamed: #peHeader
 		ifFound: [ :playerElement |
-			playerElement player: self player.
+			playerElement player quit.
+			playerElement player: self newPlayer.
 			^ self ]
 		ifNone: [
-			playerWidget := LlMediaPlayerElement on: self player.
+			playerWidget := LlMediaPlayerElement on: self newPlayer.
 			aLePageToolContentElement headerElement addChild: playerWidget as: #peHeader ].
-]
-
-{ #category : #accessing }
-QuLeTransciptPageType >> player [
-	^ player ifNil: [ player := self model newPlayer ]
 ]
 
 { #category : #printing }
@@ -175,12 +175,6 @@ QuLeTransciptPageType >> printOn: aStream [
 	aStream
 		<< 'QuTranscript Page: ';
 		<< (self model ifNotNil: #printString ifNil: [ '<none>' ])
-]
-
-{ #category : #accessing }
-QuLeTransciptPageType >> resetPlayer [
-
-	player := nil
 ]
 
 { #category : #accessing }
