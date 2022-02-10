@@ -8,16 +8,21 @@ Class {
 QuLeTranscriptPageElement class >> isClassFor: anLePageToolContentElement [
 
 	^ anLePageToolContentElement headerElement 
-		childNamed: #peHeader
+		childNamed: self playerElementName
 		ifFound: [ :playerElement | true ]
 		ifNone: [ false ]
+]
+
+{ #category : #accessing }
+QuLeTranscriptPageElement class >> playerElementName [
+	^ #quTranscriptPlayer
 ]
 
 { #category : #accessing }
 QuLeTranscriptPageElement >> install [
 	| playerWidget |
 	playerWidget := LlMediaPlayerElement on: self pageType newPlayer.
-	self contentElement headerElement addChild: playerWidget as: self playerElementName.
+	self contentElement headerElement addChild: playerWidget as: self class playerElementName.
 			
 	self contentElement
 		when: QuLeTranscriptPlayerRequest 
@@ -25,22 +30,9 @@ QuLeTranscriptPageElement >> install [
 ]
 
 { #category : #accessing }
-QuLeTranscriptPageElement >> onPageViewModelChanged [
-	
-	self pageType pageElementClass = self class 
-		ifTrue: [ self resetPlayer ]
-		ifFalse: [ self uninstall ].
-]
-
-{ #category : #accessing }
-QuLeTranscriptPageElement >> playerElementName [
-	^ #quTranscriptPlayer
-]
-
-{ #category : #accessing }
-QuLeTranscriptPageElement >> resetPlayer [
+QuLeTranscriptPageElement >> reset [
 	self contentElement headerElement 
-		childNamed: self playerElementName
+		childNamed: self class playerElementName
 		ifFound: [ :playerElement |
 			playerElement player quit.
 			playerElement player: self pageType newPlayer ]
@@ -51,5 +43,5 @@ QuLeTranscriptPageElement >> uninstall [
 	| header |
 	self contentElement removeEventHandlersSuchThat: [ :evt | evt eventClass = QuLeTranscriptPlayerRequest ].
 	header := self contentElement headerElement.
-	header removeChildNamed: self playerElementName
+	header removeChildNamed: self class playerElementName
 ]
