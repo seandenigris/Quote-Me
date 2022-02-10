@@ -1,0 +1,55 @@
+Class {
+	#name : #QuLeTranscriptPageElement,
+	#superclass : #PeLePageElement,
+	#category : #'QuoteMe-GToolkit-Transcripts-Lepiter'
+}
+
+{ #category : #testing }
+QuLeTranscriptPageElement class >> isClassFor: anLePageToolContentElement [
+
+	^ anLePageToolContentElement headerElement 
+		childNamed: #peHeader
+		ifFound: [ :playerElement | true ]
+		ifNone: [ false ]
+]
+
+{ #category : #accessing }
+QuLeTranscriptPageElement >> install [
+	| playerWidget |
+	playerWidget := LlMediaPlayerElement on: self pageType newPlayer.
+	self contentElement headerElement addChild: playerWidget as: self playerElementName.
+			
+	self contentElement
+		when: QuLeTranscriptPlayerRequest 
+		do: [ :anEvent | anEvent answer: playerWidget player ]
+]
+
+{ #category : #accessing }
+QuLeTranscriptPageElement >> onPageViewModelChanged [
+	
+	self pageType pageElementClass = self class 
+		ifTrue: [ self resetPlayer ]
+		ifFalse: [ self uninstall ].
+]
+
+{ #category : #accessing }
+QuLeTranscriptPageElement >> playerElementName [
+	^ #quTranscriptPlayer
+]
+
+{ #category : #accessing }
+QuLeTranscriptPageElement >> resetPlayer [
+	self contentElement headerElement 
+		childNamed: self playerElementName
+		ifFound: [ :playerElement |
+			playerElement player quit.
+			playerElement player: self pageType newPlayer ]
+]
+
+{ #category : #accessing }
+QuLeTranscriptPageElement >> uninstall [
+	| header |
+	self contentElement removeEventHandlersSuchThat: [ :evt | evt eventClass = QuLeTranscriptPlayerRequest ].
+	header := self contentElement headerElement.
+	header removeChildNamed: self playerElementName
+]

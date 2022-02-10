@@ -151,22 +151,8 @@ QuLeTransciptPageType >> newPlayer [
 ]
 
 { #category : #accessing }
-QuLeTransciptPageType >> peCustomizePageToolContentTreeElement: aLePageToolContentElement [
-	"Sent from LePageToolContentTreeElement>>#onPageViewModelChanged"
-
-	| playerWidget |
-	
-	self model isPlayable ifFalse: [ ^ super peCustomizePageToolContentTreeElement: aLePageToolContentElement ].
-	
-	aLePageToolContentElement headerElement 
-		childNamed: #peHeader
-		ifFound: [ :playerElement |
-			playerElement player quit.
-			playerElement player: self newPlayer.
-			^ self ]
-		ifNone: [
-			playerWidget := LlMediaPlayerElement on: self newPlayer.
-			aLePageToolContentElement headerElement addChild: playerWidget as: #peHeader ].
+QuLeTransciptPageType >> pageElementClass [
+	^ QuLeTranscriptPageElement
 ]
 
 { #category : #printing }

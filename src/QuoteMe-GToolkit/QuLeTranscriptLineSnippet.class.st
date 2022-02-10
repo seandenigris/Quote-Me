@@ -73,9 +73,6 @@ QuLeTranscriptLineSnippet >> initializeLine [
 		contentSnippetID: self uid;
 		yourself.
 		
-	player := self page type player.
-	player isRunning ifTrue: [ newLine position: player currentPosition ].
-	
 	self transcriptable participants size = 1 ifTrue: [ 
 		newLine speaker: self transcriptable participants first ].
 	self transcriptable transcript lines add: newLine

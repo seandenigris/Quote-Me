@@ -16,6 +16,11 @@ QuLeTranscriptLineSnippetElement >> controlNames [
 ]
 
 { #category : #accessing }
+QuLeTranscriptLineSnippetElement >> firePlayerRequest: aBlock [
+	self fireEvent: (QuLeTranscriptPlayerRequest action: aBlock)
+]
+
+{ #category : #accessing }
 QuLeTranscriptLineSnippetElement >> hideControls [
 	snippetContent ifNil: [ ^ self ].
 	self controlNames do: [ :cName | (snippetContent childNamed: cName) visibility: BlVisibility gone ].
@@ -54,7 +59,7 @@ QuLeTranscriptLineSnippetElement >> newSearchButton [
 { #category : #accessing }
 QuLeTranscriptLineSnippetElement >> onPositionClicked: evt [
 	self snippet line position ifNotNil: [ :pos | 
-		self snippet page type player currentPosition: pos ]
+		self firePlayerRequest: [ :player | player currentPosition: pos ] ]
 ]
 
 { #category : #accessing }
@@ -93,9 +98,7 @@ QuLeTranscriptLineSnippetElement >> snippetContent [
 		aptitude: BrGlamorousButtonWithIconAptitude; 
 		icon: BrGlamorousVectorIcons performance; 
 		"tooltip: 'Set position to current';" 
-		action: [ 
-			self snippet line position: self snippet page type player currentPosition.
-			self onSnippetViewModelChanged ];
+		action: [ self syncPositionWithPlayer ];
 		yourself.
 		
 	positionLabel := BrLabel new
@@ -133,4 +136,12 @@ QuLeTranscriptLineSnippetElement >> snippetContent [
 QuLeTranscriptLineSnippetElement >> snippetToolbar [
 
 	^ nil
+]
+
+{ #category : #accessing }
+QuLeTranscriptLineSnippetElement >> syncPositionWithPlayer [
+	
+	self fireEvent: (QuLeTranscriptPlayerRequest action: [ :player | 
+		self snippet line position: player currentPosition.
+		self onSnippetViewModelChanged ])
 ]
