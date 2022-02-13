@@ -103,6 +103,11 @@ QuLeTransciptPageType >> = anObject [
 ]
 
 { #category : #accessing }
+QuLeTransciptPageType >> asContentUIModel [
+	^ QuLeTranscriptPageViewModel new pageModel: self page
+]
+
+{ #category : #accessing }
 QuLeTransciptPageType >> databaseKey [
 	"Answer the attribute used to index a page of the receiver's type in the database."
 

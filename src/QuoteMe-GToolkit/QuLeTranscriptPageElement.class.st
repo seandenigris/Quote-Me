@@ -21,7 +21,7 @@ QuLeTranscriptPageElement class >> playerElementName [
 { #category : #accessing }
 QuLeTranscriptPageElement >> install [
 	| playerWidget |
-	playerWidget := LlMediaPlayerElement on: self pageType newPlayer.
+	playerWidget := LlMediaPlayerElement on: self contentElement pageViewModel player.
 	self contentElement headerElement addChild: playerWidget as: self class playerElementName.
 			
 	self contentElement

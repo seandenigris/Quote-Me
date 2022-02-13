@@ -66,6 +66,11 @@ QuLeTranscriptLineSnippetElement >> onPositionClicked: evt [
 QuLeTranscriptLineSnippetElement >> onSnippetViewModelChanged [
 	"self onSourceChanged."
 	super onSnippetViewModelChanged.
+	self snippet line position ifNil: [ 
+		self inform: 'pos nil'.
+		self firePlayerRequest: [ :player | 
+			self inform: 'req'.
+			self snippet line position: player currentPosition ] ].
 	positionLabel text: self snippetViewModel positionDisplayText.
 	speakerLabel text: self snippetViewModel speakerDisplayText.
 ]
