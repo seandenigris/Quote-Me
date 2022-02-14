@@ -30,6 +30,10 @@ QuLeTranscriptLineSnippetElement >> hideControls [
 QuLeTranscriptLineSnippetElement >> initialize [
 
 	super initialize.
+	
+	self editor
+		when: BrTextEditorModifiedEvent
+		do: [ :anEvent | self onTextModified: anEvent ].
 		
 	self addAptitude: (BrStyleCommonAptitude new
 		when: BlElementState focused | BlElementState hovered
@@ -64,13 +68,8 @@ QuLeTranscriptLineSnippetElement >> onPositionClicked: evt [
 
 { #category : #accessing }
 QuLeTranscriptLineSnippetElement >> onSnippetViewModelChanged [
-	"self onSourceChanged."
+	
 	super onSnippetViewModelChanged.
-	self snippet line position ifNil: [ 
-		self inform: 'pos nil'.
-		self firePlayerRequest: [ :player | 
-			self inform: 'req'.
-			self snippet line position: player currentPosition ] ].
 	positionLabel text: self snippetViewModel positionDisplayText.
 	speakerLabel text: self snippetViewModel speakerDisplayText.
 ]
@@ -81,6 +80,12 @@ QuLeTranscriptLineSnippetElement >> onSnippetViewModelFocused: aBoolean [
 	aBoolean ifFalse: [ ^ self ].
 	
 	self flag: 'waiting for help on shortcut actions via Discord'.
+]
+
+{ #category : #accessing }
+QuLeTranscriptLineSnippetElement >> onTextModified: anEvent [
+	(anEvent text isNotEmpty and: [ self snippet line position isNil ])
+		ifTrue: [ self syncPositionWithPlayer ]
 ]
 
 { #category : #accessing }
