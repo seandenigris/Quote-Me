@@ -18,7 +18,7 @@ QuLeTranscriptLineSnippet class >> exampleDumbledore [
 	page := QuLeTransciptPageType exampleEmptyPage.
 	result := self empty.
 	page addSnippet: result.
-	result line speaker: page type model participants first.
+	result line speaker: page type subjectModel participants first.
 	result text: 'To the well-organized mind, death is but the next great adventure.' asRopedText.
 	^ result
 ]
@@ -31,7 +31,7 @@ QuLeTranscriptLineSnippet class >> exampleHarryPotter [
 	page := QuLeTransciptPageType exampleEmptyPage.
 	result := self empty.
 	page addSnippet: result.
-	result line speaker: page type model participants first.
+	result line speaker: page type subjectModel participants first.
 	result text: 'I don''t want to be rude or anything, but—this isn''t a great time for me to have a house elf in my bedroom.' asRopedText.
 	^ result
 ]
@@ -109,5 +109,5 @@ QuLeTranscriptLineSnippet >> speaker: aPerson [
 
 { #category : #accessing }
 QuLeTranscriptLineSnippet >> transcriptable [
-	^ self page type model
+	^ self page type subjectModel
 ]

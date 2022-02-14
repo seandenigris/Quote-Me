@@ -20,5 +20,5 @@ QuTranscript >> lepiterPage [
 
 { #category : #'*QuoteMe-GToolkit' }
 QuTranscript >> newLepiterPage [
-	^ LePage quTranscriptOwner: self model
+	^ LePage quTranscriptOwner: self subjectModel
 ]

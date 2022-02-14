@@ -4,7 +4,7 @@ Extension { #name : #LePage }
 LePage class >> quTranscriptOwner: anObject [
 	| result type |
 	result := self new.
-	type := QuLeTransciptPageType model: anObject page: result.
+	type := QuLeTransciptPageType subjectModel: anObject page: result.
 	^ result
 		type: type;
 		yourself

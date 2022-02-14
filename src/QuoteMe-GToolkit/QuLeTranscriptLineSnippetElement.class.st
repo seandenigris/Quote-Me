@@ -47,7 +47,7 @@ QuLeTranscriptLineSnippetElement >> initialize [
 QuLeTranscriptLineSnippetElement >> newSearchButton [
 
 	^ GtSpotterDropdownButtonStencil new
-		valuable: [ self snippet page type model participants ];
+		valuable: [ self snippet page type subjectModel participants ];
 		icon: BrGlamorousVectorIcons search;
 		spotterModelDo: [ :sm |
 			sm announcer

@@ -7,7 +7,7 @@ Class {
 	#name : #QuLeTransciptPageType,
 	#superclass : #LePageType,
 	#instVars : [
-		'modelReference'
+		'subjectModelReference'
 	],
 	#classVars : [
 		'ModelReferenceBuilder',
@@ -51,7 +51,7 @@ QuLeTransciptPageType class >> exampleEmptyPage [
 QuLeTransciptPageType class >> leJsonV4AttributeMapping [
 
 	^ super leJsonV4AttributeMapping
-		add: (#modelReference -> #modelReference);
+		add: (#subjectModelReference -> #subjectModelReference);
 		yourself
 ]
 
@@ -59,19 +59,6 @@ QuLeTransciptPageType class >> leJsonV4AttributeMapping [
 QuLeTransciptPageType class >> leJsonV4Name [
 
 	^ 'quTranscriptPage'
-]
-
-{ #category : #'instance creation' }
-QuLeTransciptPageType class >> model: anObject page: aLePage [
-	| referenceBuilder reference |
-	referenceBuilder := self modelReferenceBuilderMap at: anObject class.
-	reference := referenceBuilder value
-		uid: anObject ensureUUID;
-		yourself.
-	^ QuLeTransciptPageType new
-		modelReference: reference;
-		page: aLePage;
-		yourself.
 ]
 
 { #category : #accessing }
@@ -91,6 +78,19 @@ QuLeTransciptPageType class >> modelReferenceForClass: aClass builder: aValuable
 	^ self modelReferenceBuilderMap at: aClass put: aValuable
 ]
 
+{ #category : #'instance creation' }
+QuLeTransciptPageType class >> subjectModel: anObject page: aLePage [
+	| referenceBuilder reference |
+	referenceBuilder := self modelReferenceBuilderMap at: anObject class.
+	reference := referenceBuilder value
+		uid: anObject ensureUUID;
+		yourself.
+	^ QuLeTransciptPageType new
+		subjectModelReference: reference;
+		page: aLePage;
+		yourself.
+]
+
 { #category : #comparing }
 QuLeTransciptPageType >> = anObject [
 	"Answer whether the receiver and anObject represent the same page type."
@@ -99,7 +99,7 @@ QuLeTransciptPageType >> = anObject [
 		ifTrue: [ ^ true ].
 	self class = anObject class
 		ifFalse: [ ^ false ].
-	^ self modelID = anObject modelID
+	^ self subjectModelID = anObject subjectModelID
 ]
 
 { #category : #accessing }
@@ -111,14 +111,14 @@ QuLeTransciptPageType >> asContentUIModel [
 QuLeTransciptPageType >> databaseKey [
 	"Answer the attribute used to index a page of the receiver's type in the database."
 
-	^ self modelID
+	^ self subjectModelID
 ]
 
 { #category : #comparing }
 QuLeTransciptPageType >> hash [
 	"Answer an integer value that is related to the identity of the receiver."
 
-	^ self modelID hash
+	^ self subjectModelID hash
 ]
 
 { #category : #'api - testing' }
@@ -127,32 +127,8 @@ QuLeTransciptPageType >> isQuTranscriptPageType [
 ]
 
 { #category : #accessing }
-QuLeTransciptPageType >> model [
-	self modelReference ifNil: [ ^ nil ].
-	^ self modelReference object
-]
-
-{ #category : #accessing }
-QuLeTransciptPageType >> modelID [
-
-	^ self modelReference ifNotNil: [ :ref | ref uid ]
-]
-
-{ #category : #accessing }
-QuLeTransciptPageType >> modelReference [
-
-	^ modelReference
-]
-
-{ #category : #accessing }
-QuLeTransciptPageType >> modelReference: anMAObjectUIDReference [
-
-	modelReference := anMAObjectUIDReference
-]
-
-{ #category : #accessing }
 QuLeTransciptPageType >> newPlayer [
-	^ self model newPlayer
+	^ self subjectModel newPlayer
 ]
 
 { #category : #accessing }
@@ -165,7 +141,7 @@ QuLeTransciptPageType >> printOn: aStream [
 
 	aStream
 		<< 'QuTranscript Page: ';
-		<< (self model ifNotNil: #printString ifNil: [ '<none>' ])
+		<< (self subjectModel ifNotNil: #printString ifNil: [ '<none>' ])
 ]
 
 { #category : #accessing }
@@ -176,9 +152,33 @@ QuLeTransciptPageType >> snippetBuilder [
 ]
 
 { #category : #accessing }
+QuLeTransciptPageType >> subjectModel [
+	self subjectModelReference ifNil: [ ^ nil ].
+	^ self subjectModelReference object
+]
+
+{ #category : #accessing }
+QuLeTransciptPageType >> subjectModelID [
+
+	^ self subjectModelReference ifNotNil: [ :ref | ref uid ]
+]
+
+{ #category : #accessing }
+QuLeTransciptPageType >> subjectModelReference [
+
+	^ subjectModelReference
+]
+
+{ #category : #accessing }
+QuLeTransciptPageType >> subjectModelReference: anMAObjectUIDReference [
+
+	subjectModelReference := anMAObjectUIDReference
+]
+
+{ #category : #accessing }
 QuLeTransciptPageType >> title [
 
-	^ self model 
+	^ self subjectModel 
 		ifNotNil: [ : sub | sub transcript title ]
 		ifNil: [ 'QuTranscript Page' ]
 ]

@@ -4,7 +4,8 @@ Class {
 	#instVars : [
 		'lines',
 		'pageID',
-		'model'
+		'model',
+		'titleSource'
 	],
 	#category : #'QuoteMe-Transcripts'
 }
@@ -32,16 +33,6 @@ QuTranscript >> lines: anObject [
 ]
 
 { #category : #accessing }
-QuTranscript >> model [
-	^ model
-]
-
-{ #category : #accessing }
-QuTranscript >> model: anObject [
-	model := anObject
-]
-
-{ #category : #accessing }
 QuTranscript >> pageID [
 
 	^ pageID
@@ -54,6 +45,30 @@ QuTranscript >> pageID: anObject [
 ]
 
 { #category : #accessing }
+QuTranscript >> subjectModel [
+	^ model
+]
+
+{ #category : #accessing }
+QuTranscript >> subjectModel: anObject [
+	model := anObject
+]
+
+{ #category : #accessing }
 QuTranscript >> title [
-	^ self model displayString
+	^ self titleSource
+		ifNil: [ self subjectModel displayString ]
+		ifNotNil: [ :ts | ts title ]
+]
+
+{ #category : #accessing }
+QuTranscript >> titleSource [
+	"See setter comment"
+	^ titleSource
+]
+
+{ #category : #accessing }
+QuTranscript >> titleSource: anObject [
+	"Title source handles the situation where a higher level object (i.e. one with more metainfo delegates transcripting to a lower level one. For example, an event recording work uses its copy's transcript as its own, but the title should be the work's title, which is more intention revealing"
+	titleSource := anObject
 ]
