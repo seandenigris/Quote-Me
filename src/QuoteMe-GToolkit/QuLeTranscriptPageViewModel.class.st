@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'player'
 	],
-	#category : #'QuoteMe-GToolkit'
+	#category : #'QuoteMe-GToolkit-Transcripts-Lepiter'
 }
 
 { #category : #accessing }

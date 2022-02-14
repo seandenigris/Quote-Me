@@ -179,6 +179,6 @@ QuLeTransciptPageType >> snippetBuilder [
 QuLeTransciptPageType >> title [
 
 	^ self model 
-		ifNotNil: #displayString
+		ifNotNil: [ : sub | sub transcript title ]
 		ifNil: [ 'QuTranscript Page' ]
 ]

@@ -52,3 +52,8 @@ QuTranscript >> pageID: anObject [
 
 	pageID := anObject
 ]
+
+{ #category : #accessing }
+QuTranscript >> title [
+	^ self model displayString
+]
