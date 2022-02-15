@@ -74,6 +74,16 @@ QuLeTransciptPageType class >> modelReferenceBuilderMap: anObject [
 ]
 
 { #category : #accessing }
+QuLeTransciptPageType class >> modelReferenceForClass: aClass [
+	^ self modelReferenceBuilderMap 
+		at: aClass
+		ifAbsent: [ 
+			aClass superclass
+				ifNotNil: [ :supr | self modelReferenceForClass: supr ]
+				ifNil: [ self error: 'no builder for ', aClass name ] ]
+]
+
+{ #category : #accessing }
 QuLeTransciptPageType class >> modelReferenceForClass: aClass builder: aValuable [
 	^ self modelReferenceBuilderMap at: aClass put: aValuable
 ]
