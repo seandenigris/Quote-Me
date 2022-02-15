@@ -91,7 +91,7 @@ QuLeTransciptPageType class >> modelReferenceForClass: aClass builder: aValuable
 { #category : #'instance creation' }
 QuLeTransciptPageType class >> subjectModel: anObject page: aLePage [
 	| referenceBuilder reference |
-	referenceBuilder := self modelReferenceBuilderMap at: anObject class.
+	referenceBuilder := self modelReferenceForClass: anObject class.
 	reference := referenceBuilder value
 		uid: anObject ensureUUID;
 		yourself.
