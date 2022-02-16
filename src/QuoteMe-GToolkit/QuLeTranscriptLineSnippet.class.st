@@ -1,6 +1,9 @@
 Class {
 	#name : #QuLeTranscriptLineSnippet,
 	#superclass : #LeTextSnippet,
+	#instVars : [
+		'cachedLine'
+	],
 	#category : #'QuoteMe-GToolkit-Transcripts-Lepiter'
 }
 
@@ -89,12 +92,27 @@ QuLeTranscriptLineSnippet >> line [
 { #category : #accessing }
 QuLeTranscriptLineSnippet >> parent: anObject [
 
-	anObject ifNil: [ 
-		"Removed snippet from page"
-		self transcriptable transcript lines remove: self line.
-		^ self ].
+	| isRemoving |
+	isRemoving := anObject isNil.
+	
+	isRemoving ifTrue: [ 
+		"We must do this before nil-ing out parent because we access the transcript *via that parent*"
+		cachedLine := self line.
+		self transcriptable transcript lines remove: self line ].
+
 	super parent: anObject.
-	self line ifNil: [ self initializeLine ].
+	
+	isRemoving ifTrue: [ ^ self ].
+		
+	self line 
+		ifNil: [ 
+			"Brand new snippet"
+			self initializeLine ]
+		ifNotNil: [ 
+			"Snippet re-added after being moved"
+			cachedLine ifNil: [ self error: 'should only reach here with line cached' ].
+			self transcriptable transcript lines add: cachedLine.
+			cachedLine := nil "We don't want to rely on the cache unless we absolutely have to because we don't have a contract with the transcript model" ].
 ]
 
 { #category : #accessing }
