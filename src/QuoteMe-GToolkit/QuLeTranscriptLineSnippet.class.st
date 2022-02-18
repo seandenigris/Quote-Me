@@ -102,17 +102,18 @@ QuLeTranscriptLineSnippet >> parent: anObject [
 
 	super parent: anObject.
 	
-	isRemoving ifTrue: [ ^ self ].
+	(isRemoving or: [ "isMaterializing" self page isNil ]) ifTrue: [ ^ self ].
 		
-	self line 
-		ifNil: [ 
-			"Brand new snippet"
-			self initializeLine ]
-		ifNotNil: [ 
-			"Snippet re-added after being moved"
-			cachedLine ifNil: [ self error: 'should only reach here with line cached' ].
-			self transcriptable transcript lines add: cachedLine.
-			cachedLine := nil "We don't want to rely on the cache unless we absolutely have to because we don't have a contract with the transcript model" ].
+	self line ifNil: [ 
+		"Brand new snippet"
+		self initializeLine.
+		^ self ].
+		
+	"Will also end up here during materialization when adding a top-level snippet to a page"
+	cachedLine ifNotNil: [ 
+		"Snippet re-added after being moved"
+		self transcriptable transcript lines add: cachedLine.
+		cachedLine := nil "We don't want to rely on the cache unless we absolutely have to because we don't have a contract with the transcript model" ].
 ]
 
 { #category : #accessing }
