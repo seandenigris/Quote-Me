@@ -18,7 +18,7 @@ QuLeTranscriptLineSnippet class >> exampleDumbledore [
 	<gtExample>
 	
 	| page result |
-	page := QuLeTransciptPageType exampleEmptyPage.
+	page := QuLeTranscriptPageType exampleEmptyPage.
 	result := self empty.
 	page addSnippet: result.
 	result line speaker: page type subjectModel participants first.
@@ -31,7 +31,7 @@ QuLeTranscriptLineSnippet class >> exampleHarryPotter [
 	<gtExample>
 	
 	| page result |
-	page := QuLeTransciptPageType exampleEmptyPage.
+	page := QuLeTranscriptPageType exampleEmptyPage.
 	result := self empty.
 	page addSnippet: result.
 	result line speaker: page type subjectModel participants first.

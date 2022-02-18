@@ -4,7 +4,7 @@ The problem with creating an instance is that a particular model object may not 
 Thus, we provide a class-side map for libraries to configure how to construct a reference for a particular class. The configuration can be edited via {{gtMethod:QuLeTransciptPageType class>>#modelReferenceForClass:builder:}}
 "
 Class {
-	#name : #QuLeTransciptPageType,
+	#name : #QuLeTranscriptPageType,
 	#superclass : #LePageType,
 	#instVars : [
 		'subjectModelReference'
@@ -17,7 +17,7 @@ Class {
 }
 
 { #category : #examples }
-QuLeTransciptPageType class >> example [
+QuLeTranscriptPageType class >> example [
 	<gtExample>
 	^ self exampleEmptyPage
 		addSnippet: QuLeTranscriptLineSnippet exampleDumbledore;
@@ -26,7 +26,7 @@ QuLeTransciptPageType class >> example [
 ]
 
 { #category : #examples }
-QuLeTransciptPageType class >> exampleEmptyPage [
+QuLeTranscriptPageType class >> exampleEmptyPage [
 	<gtExample>
 	
 	| page model transcript |
@@ -48,7 +48,7 @@ QuLeTransciptPageType class >> exampleEmptyPage [
 ]
 
 { #category : #accessing }
-QuLeTransciptPageType class >> leJsonV4AttributeMapping [
+QuLeTranscriptPageType class >> leJsonV4AttributeMapping [
 
 	^ super leJsonV4AttributeMapping
 		add: (#subjectModelReference -> #subjectModelReference);
@@ -56,25 +56,25 @@ QuLeTransciptPageType class >> leJsonV4AttributeMapping [
 ]
 
 { #category : #accessing }
-QuLeTransciptPageType class >> leJsonV4Name [
+QuLeTranscriptPageType class >> leJsonV4Name [
 
 	^ 'quTranscriptPage'
 ]
 
 { #category : #accessing }
-QuLeTransciptPageType class >> modelReferenceBuilderMap [
+QuLeTranscriptPageType class >> modelReferenceBuilderMap [
 
 	^ ModelReferenceBuilderMap ifNil: [ ModelReferenceBuilderMap := Dictionary new ]
 ]
 
 { #category : #accessing }
-QuLeTransciptPageType class >> modelReferenceBuilderMap: anObject [
+QuLeTranscriptPageType class >> modelReferenceBuilderMap: anObject [
 
 	^ ModelReferenceBuilderMap := anObject
 ]
 
 { #category : #accessing }
-QuLeTransciptPageType class >> modelReferenceForClass: aClass [
+QuLeTranscriptPageType class >> modelReferenceForClass: aClass [
 	^ self modelReferenceBuilderMap 
 		at: aClass
 		ifAbsent: [ 
@@ -84,25 +84,25 @@ QuLeTransciptPageType class >> modelReferenceForClass: aClass [
 ]
 
 { #category : #accessing }
-QuLeTransciptPageType class >> modelReferenceForClass: aClass builder: aValuable [
+QuLeTranscriptPageType class >> modelReferenceForClass: aClass builder: aValuable [
 	^ self modelReferenceBuilderMap at: aClass put: aValuable
 ]
 
 { #category : #'instance creation' }
-QuLeTransciptPageType class >> subjectModel: anObject page: aLePage [
+QuLeTranscriptPageType class >> subjectModel: anObject page: aLePage [
 	| referenceBuilder reference |
 	referenceBuilder := self modelReferenceForClass: anObject class.
 	reference := referenceBuilder value
 		uid: anObject ensureUUID;
 		yourself.
-	^ QuLeTransciptPageType new
+	^ QuLeTranscriptPageType new
 		subjectModelReference: reference;
 		page: aLePage;
 		yourself.
 ]
 
 { #category : #comparing }
-QuLeTransciptPageType >> = anObject [
+QuLeTranscriptPageType >> = anObject [
 	"Answer whether the receiver and anObject represent the same page type."
 
 	self == anObject
@@ -113,41 +113,41 @@ QuLeTransciptPageType >> = anObject [
 ]
 
 { #category : #accessing }
-QuLeTransciptPageType >> asContentUIModel [
+QuLeTranscriptPageType >> asContentUIModel [
 	^ QuLeTranscriptPageViewModel new pageModel: self page
 ]
 
 { #category : #accessing }
-QuLeTransciptPageType >> databaseKey [
+QuLeTranscriptPageType >> databaseKey [
 	"Answer the attribute used to index a page of the receiver's type in the database."
 
 	^ self subjectModelID
 ]
 
 { #category : #comparing }
-QuLeTransciptPageType >> hash [
+QuLeTranscriptPageType >> hash [
 	"Answer an integer value that is related to the identity of the receiver."
 
 	^ self subjectModelID hash
 ]
 
 { #category : #'api - testing' }
-QuLeTransciptPageType >> isQuTranscriptPageType [
+QuLeTranscriptPageType >> isQuTranscriptPageType [
 	^ true
 ]
 
 { #category : #accessing }
-QuLeTransciptPageType >> newPlayer [
+QuLeTranscriptPageType >> newPlayer [
 	^ self subjectModel newPlayer
 ]
 
 { #category : #accessing }
-QuLeTransciptPageType >> pageElementClass [
+QuLeTranscriptPageType >> pageElementClass [
 	^ QuLeTranscriptPageElement
 ]
 
 { #category : #printing }
-QuLeTransciptPageType >> printOn: aStream [
+QuLeTranscriptPageType >> printOn: aStream [
 
 	aStream
 		<< 'QuTranscript Page: ';
@@ -155,38 +155,38 @@ QuLeTransciptPageType >> printOn: aStream [
 ]
 
 { #category : #accessing }
-QuLeTransciptPageType >> snippetBuilder [
+QuLeTranscriptPageType >> snippetBuilder [
 	^ QuLeTranscriptSnippetBuilder new
 		parent: self page;
 		database: self page database.
 ]
 
 { #category : #accessing }
-QuLeTransciptPageType >> subjectModel [
+QuLeTranscriptPageType >> subjectModel [
 	self subjectModelReference ifNil: [ ^ nil ].
 	^ self subjectModelReference object
 ]
 
 { #category : #accessing }
-QuLeTransciptPageType >> subjectModelID [
+QuLeTranscriptPageType >> subjectModelID [
 
 	^ self subjectModelReference ifNotNil: [ :ref | ref uid ]
 ]
 
 { #category : #accessing }
-QuLeTransciptPageType >> subjectModelReference [
+QuLeTranscriptPageType >> subjectModelReference [
 
 	^ subjectModelReference
 ]
 
 { #category : #accessing }
-QuLeTransciptPageType >> subjectModelReference: anMAObjectUIDReference [
+QuLeTranscriptPageType >> subjectModelReference: anMAObjectUIDReference [
 
 	subjectModelReference := anMAObjectUIDReference
 ]
 
 { #category : #accessing }
-QuLeTransciptPageType >> title [
+QuLeTranscriptPageType >> title [
 
 	^ self subjectModel 
 		ifNotNil: [ : sub | sub transcript title ]
