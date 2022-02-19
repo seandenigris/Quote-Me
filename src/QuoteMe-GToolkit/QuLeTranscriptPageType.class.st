@@ -47,6 +47,12 @@ QuLeTranscriptPageType class >> exampleEmptyPage [
 	^ page
 ]
 
+{ #category : #initialization }
+QuLeTranscriptPageType class >> initialize [
+
+	LeDatabasesRegistry defaultPrimaryDatabase updatePageTypes
+]
+
 { #category : #accessing }
 QuLeTranscriptPageType class >> leJsonV4AttributeMapping [
 
