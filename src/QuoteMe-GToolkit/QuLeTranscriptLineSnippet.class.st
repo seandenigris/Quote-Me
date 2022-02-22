@@ -103,11 +103,17 @@ QuLeTranscriptLineSnippet >> parent: anObject [
 	super parent: anObject.
 	
 	(isRemoving or: [ "isMaterializing" self page isNil ]) ifTrue: [ ^ self ].
-		
-	self line ifNil: [ 
-		"Brand new snippet"
-		self initializeLine.
-		^ self ].
+	
+	self transcriptable	
+		ifNil: [ 
+			self notify: 'Transcript subject not found'
+			"We want this to be resumable because maybe e.g. the model just hasn't been loaded yet" ]
+		ifNotNil: [
+			"This is inside the guard because to get the line, we need a subject"
+			self line ifNil: [ 
+				"Brand new snippet"
+				self initializeLine.
+				^ self ] ].
 		
 	"Will also end up here during materialization when adding a top-level snippet to a page"
 	cachedLine ifNotNil: [ 
