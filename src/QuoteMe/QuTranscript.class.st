@@ -11,6 +11,13 @@ Class {
 }
 
 { #category : #accessing }
+QuTranscript >> delete [
+	self subjectModel transcript: nil.
+	self subjectModel: nil.
+	self notify: 'What should we do about Lepiter page?'
+]
+
+{ #category : #accessing }
 QuTranscript >> gtViewLinesFor: aView [
 	<gtView>
 	
