@@ -49,6 +49,18 @@ LlMediaPlayerElement >> initialize [
 			label: 'Faster';
 			icon: BrGlamorousVectorIcons upwards;
 			action: [ self player speed: self player speed * 2 ].
+			
+		BrButton new 
+			aptitude: BrGlamorousButtonWithIconAptitude;
+			label: 'Next section';
+			icon: BrGlamorousVectorIcons right;
+			action: [ self player nextSection ].
+			
+		BrButton new 
+			aptitude: BrGlamorousButtonWithIconAptitude;
+			label: 'Inspect player';
+			icon: BrGlamorousVectorIcons inspect;
+			action: [ :aButton | aButton phlow spawnObject: self player ].
 	}.
 	
 	buttons do: [ :b | self addChild: b ].
