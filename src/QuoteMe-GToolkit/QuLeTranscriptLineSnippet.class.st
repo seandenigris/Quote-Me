@@ -58,6 +58,11 @@ QuLeTranscriptLineSnippet >> asSnippetViewModel [
 ]
 
 { #category : #accessing }
+QuLeTranscriptLineSnippet >> contentAsString [
+	^ self line position quTranscriptPositionGtDisplayText asString, ' ', self line speaker fullName, ': ', self string
+]
+
+{ #category : #accessing }
 QuLeTranscriptLineSnippet >> gtViewLineFor: aView [
 	<gtView>
 	self line ifNil: [ ^ aView empty ].
