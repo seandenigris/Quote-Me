@@ -59,7 +59,10 @@ QuLeTranscriptLineSnippet >> asSnippetViewModel [
 
 { #category : #accessing }
 QuLeTranscriptLineSnippet >> contentAsString [
-	^ self line position quTranscriptPositionGtDisplayText asString, ' ', self line speaker fullName, ': ', self string
+	^ String streamContents: [ :str |
+		self line position ifNotNil: [ :pos | str << pos quTranscriptPositionGtDisplayText asString << ' ' ].
+		self line speaker ifNotNil: [ :spkr | str << spkr fullName << ': ' ].
+		str << self string ]
 ]
 
 { #category : #accessing }
