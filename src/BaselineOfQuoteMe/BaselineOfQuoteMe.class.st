@@ -25,7 +25,10 @@ BaselineOfQuoteMe >> baseline: spec [
 				spec requires: #('Mocketry' 'PharoEnhancements' 'SimplePersistence'). ]. ].
 				
 	spec for: #GToolkit do: [ 
-		spec package: 'QuoteMe-GToolkit' with: [ spec requires: #(QuoteMe) ] ]
+		spec 
+			baseline: 'ObjectiveLepiter' with: [
+				spec repository: 'github://seandenigris/Objective-Lepiter' ].
+		spec package: 'QuoteMe-GToolkit' with: [ spec requires: #(QuoteMe #ObjectiveLepiter) ] ]
 ]
 
 { #category : #accessing }
