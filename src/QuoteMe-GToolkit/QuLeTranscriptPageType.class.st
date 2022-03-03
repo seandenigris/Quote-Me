@@ -161,6 +161,13 @@ QuLeTranscriptPageType >> printOn: aStream [
 ]
 
 { #category : #accessing }
+QuLeTranscriptPageType >> saveEmptyPages [
+	"We leave it up to the subject object to decide if/when to delete"
+
+	^ true
+]
+
+{ #category : #accessing }
 QuLeTranscriptPageType >> snippetBuilder [
 	^ QuLeTranscriptSnippetBuilder new
 		parent: self page;
