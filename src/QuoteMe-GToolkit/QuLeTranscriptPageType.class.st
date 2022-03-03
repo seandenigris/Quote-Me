@@ -101,7 +101,7 @@ QuLeTranscriptPageType class >> subjectModel: anObject page: aLePage [
 	reference := referenceBuilder value
 		uid: anObject ensureUUID;
 		yourself.
-	^ QuLeTranscriptPageType new
+	^ self new
 		subjectModelReference: reference;
 		page: aLePage;
 		yourself.
