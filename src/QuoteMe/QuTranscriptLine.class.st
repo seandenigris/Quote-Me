@@ -4,7 +4,8 @@ Class {
 	#instVars : [
 		'position',
 		'speaker',
-		'contentSnippetID'
+		'contentSnippetID',
+		'type'
 	],
 	#category : #'QuoteMe-Transcripts'
 }
@@ -67,4 +68,27 @@ QuTranscriptLine >> speaker [
 QuTranscriptLine >> speaker: anObject [
 
 	speaker := anObject
+]
+
+{ #category : #accessing }
+QuTranscriptLine >> type [
+
+	^ type ifNil: [ type := self maLazyInstVarUsing: self typeDescription ]
+]
+
+{ #category : #accessing }
+QuTranscriptLine >> type: anObject [
+
+	type := anObject
+]
+
+{ #category : #'as yet unclassified' }
+QuTranscriptLine >> typeDescription [
+	<magritteDescription>
+	
+	^ MASingleOptionDescription new
+		accessor: #type;
+		options: QuQuoteLevel allSubclasses; 
+		default: QuParaphrase;
+		yourself
 ]
