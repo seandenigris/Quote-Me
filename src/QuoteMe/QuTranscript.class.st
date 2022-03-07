@@ -18,12 +18,32 @@ QuTranscript >> delete [
 ]
 
 { #category : #accessing }
+QuTranscript >> gtLiveFor: aView [
+	<gtView>
+
+	self pageID ifNil: [ ^ aView empty ].
+	
+	^ aView forward
+		title: 'Live' translated;
+		priority: 25;
+		object: [ self lepiterPage ];
+		view: #gtLiveFor:;
+		actionButtonIcon: LeIcons lepiterIcon
+			tooltip: 'Lepiter Page (Inspect)'
+			action: [ :aButton :aTab | aButton phlow spawnObject: self lepiterPage ];
+		actionButtonIcon: BrGlamorousVectorIcons inspect
+			tooltip: 'Inspect Transcript'
+			action: [ :aButton :aTab | aButton phlow spawnObject: self ];
+		actionUpdateButtonTooltip: 'Update'.
+]
+
+{ #category : #accessing }
 QuTranscript >> gtViewLinesFor: aView [
 	<gtView>
 	
 	^ aView list
 		title: 'Lines';
-		priority: 25;
+		priority: 35;
 		items: [ self lines ]
 ]
 
