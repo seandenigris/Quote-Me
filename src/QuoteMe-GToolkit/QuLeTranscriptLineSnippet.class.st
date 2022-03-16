@@ -60,8 +60,8 @@ QuLeTranscriptLineSnippet >> asSnippetViewModel [
 { #category : #accessing }
 QuLeTranscriptLineSnippet >> contentAsString [
 	^ String streamContents: [ :str |
-		self line position ifNotNil: [ :pos | str << pos quTranscriptPositionGtDisplayText asString << ' ' ].
-		self line speaker ifNotNil: [ :spkr | str << spkr fullName << ': ' ].
+		self position ifNotNil: [ :pos | str << pos quTranscriptPositionGtDisplayText asString << ' ' ].
+		self speaker ifNotNil: [ :spkr | str << spkr fullName << ': ' ].
 		str << self string ]
 ]
 
@@ -92,7 +92,9 @@ QuLeTranscriptLineSnippet >> initializeLine [
 { #category : #accessing }
 QuLeTranscriptLineSnippet >> line [
 
-	^ self transcriptable transcript lines
+	| subject |
+	subject := self transcriptable ifNil: [ ^ nil ].
+	^ subject transcript lines
 		detect: [ :e | e contentSnippetID = self uid ] 
 		ifNone: [ nil ]
 ]
@@ -133,6 +135,16 @@ QuLeTranscriptLineSnippet >> parent: anObject [
 { #category : #accessing }
 QuLeTranscriptLineSnippet >> play [
 	^ self page type player currentPosition: self line position
+]
+
+{ #category : #accessing }
+QuLeTranscriptLineSnippet >> position [
+	^ self line ifNotNil: #position
+]
+
+{ #category : #accessing }
+QuLeTranscriptLineSnippet >> speaker [
+	^ self line ifNotNil: #speaker
 ]
 
 { #category : #accessing }
