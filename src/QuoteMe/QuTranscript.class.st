@@ -14,7 +14,9 @@ Class {
 QuTranscript >> delete [
 	self subjectModel transcript: nil.
 	self subjectModel: nil.
-	self notify: 'What should we do about Lepiter page?'
+	
+	self pageID ifNil: [ ^ self ].
+	self lepiterPage removeSelf
 ]
 
 { #category : #accessing }
