@@ -51,6 +51,16 @@ LlMediaPlayerElement >> initialize [
 			action: [ self player speed: self player speed * 2 ].
 			
 		BrButton new 
+			aptitude: BrGlamorousButtonWithLabelAptitude;
+			label: '<<';
+			action: [ self player seekBy: -5 seconds ].
+			
+		BrButton new 
+			aptitude: BrGlamorousButtonWithLabelAptitude;
+			label: '>>';
+			action: [ self player seekBy: 5 seconds ].
+				
+		BrButton new 
 			aptitude: BrGlamorousButtonWithIconAptitude;
 			label: 'Next section';
 			icon: BrGlamorousVectorIcons right;
