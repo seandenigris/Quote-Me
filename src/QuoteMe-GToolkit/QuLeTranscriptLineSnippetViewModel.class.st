@@ -5,8 +5,18 @@ Class {
 }
 
 { #category : #accessing }
+QuLeTranscriptLineSnippetViewModel >> linePosition [
+	^ self snippetModel line ifNotNil: #position
+]
+
+{ #category : #accessing }
+QuLeTranscriptLineSnippetViewModel >> lineSpeaker [
+	^ self snippetModel line ifNotNil: #speaker
+]
+
+{ #category : #accessing }
 QuLeTranscriptLineSnippetViewModel >> positionDisplayText [
-	^ self snippetModel line position
+	^ self linePosition
 		ifNotNil: [ :obj | obj quTranscriptPositionGtDisplayText ]
 		ifNil: [ '' asRopedText ]
 ]
@@ -18,7 +28,7 @@ QuLeTranscriptLineSnippetViewModel >> snippetElementClass [
 
 { #category : #accessing }
 QuLeTranscriptLineSnippetViewModel >> speakerDisplayText [
-	^ self snippetModel line speaker
+	^ self lineSpeaker
 		ifNotNil: [ :spkr | spkr gtDisplayText ]
 		ifNil: [ '' asRopedText ]
 ]

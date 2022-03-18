@@ -62,7 +62,7 @@ QuLeTranscriptLineSnippetElement >> newSearchButton [
 
 { #category : #accessing }
 QuLeTranscriptLineSnippetElement >> onPositionClicked: evt [
-	self snippet line position ifNotNil: [ :pos | 
+	self snippetViewModel linePosition ifNotNil: [ :pos | 
 		self firePlayerRequest: [ :player | player currentPosition: pos ] ]
 ]
 
@@ -84,7 +84,7 @@ QuLeTranscriptLineSnippetElement >> onSnippetViewModelFocused: aBoolean [
 
 { #category : #accessing }
 QuLeTranscriptLineSnippetElement >> onTextModified: anEvent [
-	(anEvent text isNotEmpty and: [ self snippet line position isNil ])
+	(anEvent text isNotEmpty and: [ self snippetViewModel linePosition isNil ])
 		ifTrue: [ self syncPositionWithPlayer ]
 ]
 
@@ -125,7 +125,7 @@ QuLeTranscriptLineSnippetElement >> snippetContent [
 		aptitude: BrGlamorousLabelAptitude;
 		addEventHandlerOn: BlClickEvent
 			do: [ :evt | 
-				self snippet line speaker 
+				self snippetViewModel lineSpeaker 
 					ifNotNil: [ :src | evt target phlow spawnObject: src ] ];
 		hFitContent;
 		vFitContent.
