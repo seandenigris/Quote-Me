@@ -5,14 +5,7 @@ Thus, we provide a class-side map for libraries to configure how to construct a 
 "
 Class {
 	#name : #QuLeTranscriptPageType,
-	#superclass : #LePageType,
-	#instVars : [
-		'subjectModelReference'
-	],
-	#classVars : [
-		'ModelReferenceBuilder',
-		'ModelReferenceBuilderMap'
-	],
+	#superclass : #OlObjectPageType,
 	#category : #'QuoteMe-GToolkit-Transcripts-Lepiter'
 }
 
@@ -50,15 +43,7 @@ QuLeTranscriptPageType class >> exampleEmptyPage [
 { #category : #initialization }
 QuLeTranscriptPageType class >> initialize [
 
-	LeDatabasesRegistry defaultPrimaryDatabase updatePageTypes
-]
-
-{ #category : #accessing }
-QuLeTranscriptPageType class >> leJsonV4AttributeMapping [
-
-	^ super leJsonV4AttributeMapping
-		add: (#subjectModelReference -> #subjectModelReference);
-		yourself
+	self updatePrimaryDBPageTypes
 ]
 
 { #category : #accessing }
@@ -68,73 +53,8 @@ QuLeTranscriptPageType class >> leJsonV4Name [
 ]
 
 { #category : #accessing }
-QuLeTranscriptPageType class >> modelReferenceBuilderMap [
-
-	^ ModelReferenceBuilderMap ifNil: [ ModelReferenceBuilderMap := Dictionary new ]
-]
-
-{ #category : #accessing }
-QuLeTranscriptPageType class >> modelReferenceBuilderMap: anObject [
-
-	^ ModelReferenceBuilderMap := anObject
-]
-
-{ #category : #accessing }
-QuLeTranscriptPageType class >> modelReferenceForClass: aClass [
-	^ self modelReferenceBuilderMap 
-		at: aClass
-		ifAbsent: [ 
-			aClass superclass
-				ifNotNil: [ :supr | self modelReferenceForClass: supr ]
-				ifNil: [ self error: 'no builder for ', aClass name ] ]
-]
-
-{ #category : #accessing }
-QuLeTranscriptPageType class >> modelReferenceForClass: aClass builder: aValuable [
-	^ self modelReferenceBuilderMap at: aClass put: aValuable
-]
-
-{ #category : #'instance creation' }
-QuLeTranscriptPageType class >> subjectModel: anObject page: aLePage [
-	| referenceBuilder reference |
-	referenceBuilder := self modelReferenceForClass: anObject class.
-	reference := referenceBuilder value
-		uid: anObject ensureUUID;
-		yourself.
-	^ self new
-		subjectModelReference: reference;
-		page: aLePage;
-		yourself.
-]
-
-{ #category : #comparing }
-QuLeTranscriptPageType >> = anObject [
-	"Answer whether the receiver and anObject represent the same page type."
-
-	self == anObject
-		ifTrue: [ ^ true ].
-	self class = anObject class
-		ifFalse: [ ^ false ].
-	^ self subjectModelID = anObject subjectModelID
-]
-
-{ #category : #accessing }
 QuLeTranscriptPageType >> asContentUIModel [
 	^ QuLeTranscriptPageViewModel new pageModel: self page
-]
-
-{ #category : #accessing }
-QuLeTranscriptPageType >> databaseKey [
-	"Answer the attribute used to index a page of the receiver's type in the database."
-
-	^ self subjectModelID
-]
-
-{ #category : #comparing }
-QuLeTranscriptPageType >> hash [
-	"Answer an integer value that is related to the identity of the receiver."
-
-	^ self subjectModelID hash
 ]
 
 { #category : #'api - testing' }
@@ -161,41 +81,10 @@ QuLeTranscriptPageType >> printOn: aStream [
 ]
 
 { #category : #accessing }
-QuLeTranscriptPageType >> saveEmptyPages [
-	"We leave it up to the subject object to decide if/when to delete"
-
-	^ true
-]
-
-{ #category : #accessing }
 QuLeTranscriptPageType >> snippetBuilder [
 	^ QuLeTranscriptSnippetBuilder new
 		parent: self page;
 		database: self page database.
-]
-
-{ #category : #accessing }
-QuLeTranscriptPageType >> subjectModel [
-	self subjectModelReference ifNil: [ ^ nil ].
-	^ self subjectModelReference object
-]
-
-{ #category : #accessing }
-QuLeTranscriptPageType >> subjectModelID [
-
-	^ self subjectModelReference ifNotNil: [ :ref | ref uid ]
-]
-
-{ #category : #accessing }
-QuLeTranscriptPageType >> subjectModelReference [
-
-	^ subjectModelReference
-]
-
-{ #category : #accessing }
-QuLeTranscriptPageType >> subjectModelReference: anMAObjectUIDReference [
-
-	subjectModelReference := anMAObjectUIDReference
 ]
 
 { #category : #accessing }
