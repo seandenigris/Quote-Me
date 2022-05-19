@@ -21,7 +21,7 @@ QuLeSources class >> providers: anObject [
 
 { #category : #accessing }
 QuLeSources >> children [
-	^ self providers collect: #model
+	^ self providers collect: #source
 ]
 
 { #category : #accessing }
@@ -34,8 +34,19 @@ QuLeSources >> detectUuid: aString ifFound: foundBlock ifNone: noneBlock [
 			ifNone: [ ] ].
 		
 	^ noneBlock value
+]
+
+{ #category : #accessing }
+QuLeSources >> detectUuid: aUID ifNone: noneBlock [
+
+	self providers do: [ :p |
+		| result |
+		result := p 
+			detectUID: [ :uid | uid = aUID ]
+			ifNone: [ nil ].
+		result ifNotNil: [ ^ result ] ].
 		
-	
+	^ noneBlock value
 ]
 
 { #category : #accessing }

@@ -4,23 +4,8 @@ Class {
 	#instVars : [
 		'sourceID'
 	],
-	#classVars : [
-		'SourceProviders'
-	],
 	#category : #'QuoteMe-GToolkit-Citation-Lepiter'
 }
-
-{ #category : #adding }
-QuLeCitedTextSnippet class >> addSourceProvider: anObject getter: aSelector [
-
-	| provider |
-	provider := QuLeSourceProvider new
-		model: anObject;
-		sourceCollectionGetter: aSelector;
-		yourself.
-		
-	^ self sourceProviders add: provider
-]
 
 { #category : #accessing }
 QuLeCitedTextSnippet class >> contextMenuItemSpecification [
@@ -49,18 +34,6 @@ QuLeCitedTextSnippet class >> leJsonV4Name [
 ]
 
 { #category : #accessing }
-QuLeCitedTextSnippet class >> sourceProviders [
-
-	^ SourceProviders ifNil: [ SourceProviders := OrderedCollection new ]
-]
-
-{ #category : #accessing }
-QuLeCitedTextSnippet class >> sourceProviders: anObject [
-
-	^ SourceProviders := anObject
-]
-
-{ #category : #accessing }
 QuLeCitedTextSnippet >> addedToParent: aParent [
 	super addedToParent: aParent.
 	self
@@ -77,21 +50,17 @@ QuLeCitedTextSnippet >> asSnippetViewModel [
 ]
 
 { #category : #accessing }
-QuLeCitedTextSnippet >> detectSourceWithUuid: aString ifFound: foundBlock ifNone: noneBlock [
+QuLeCitedTextSnippet >> detectSourceWithUuid: aString ifNone: noneBlock [
 
-	self class sourceProviders do: [ :pro |
-		pro sourceCollection
-			detect: [ :e | e uuid = aString ] 
-			ifFound: [ :e | ^ foundBlock cull: e ]
-			ifNone: [ ] ].
-		
-	^ noneBlock value
+	^ self sourceProviders 
+		detectUuid: aString 
+		ifNone: noneBlock
 ]
 
 { #category : #accessing }
 QuLeCitedTextSnippet >> gtSpotterProcessorsFor: aSpotterStep [
 	
-	^ self class sourceProviders flatCollect: [ :pro | pro modelGtSpotterProcessorsFor: aSpotterStep ]
+	^ self sourceProviders gtSpotterProcessorsFor: aSpotterStep
 ]
 
 { #category : #accessing }
@@ -100,7 +69,6 @@ QuLeCitedTextSnippet >> source [
 	
 	^ self
 		detectSourceWithUuid: self sourceID 
-		ifFound: #yourself
 		ifNone: [ nil ]
 ]
 
@@ -112,6 +80,12 @@ QuLeCitedTextSnippet >> sourceID [
 { #category : #accessing }
 QuLeCitedTextSnippet >> sourceID: aString [ 
 	sourceID := aString
+]
+
+{ #category : #accessing }
+QuLeCitedTextSnippet >> sourceProviders [
+
+	^ QuLeSources new
 ]
 
 { #category : #accessing }
