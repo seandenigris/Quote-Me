@@ -53,7 +53,7 @@ QuLeCitedTextSnippet >> asSnippetViewModel [
 QuLeCitedTextSnippet >> detectSourceWithUuid: aString ifNone: noneBlock [
 
 	^ self sourceProviders 
-		detectUuid: aString 
+		detectUID: aString 
 		ifNone: noneBlock
 ]
 

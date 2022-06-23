@@ -25,10 +25,10 @@ QuLeSources >> children [
 ]
 
 { #category : #accessing }
-QuLeSources >> detectUuid: aString ifFound: foundBlock ifNone: noneBlock [
+QuLeSources >> detectUID: aString ifFound: foundBlock ifNone: noneBlock [
 
 	self providers do: [ :p |
-		p sourceCollection 
+		p collection 
 			detect: [ :e | e uuid = aString ] 
 			ifFound: [ :e | ^ foundBlock cull: e ]
 			ifNone: [ ] ].
@@ -37,7 +37,7 @@ QuLeSources >> detectUuid: aString ifFound: foundBlock ifNone: noneBlock [
 ]
 
 { #category : #accessing }
-QuLeSources >> detectUuid: aUID ifNone: noneBlock [
+QuLeSources >> detectUID: aUID ifNone: noneBlock [
 
 	self providers do: [ :p |
 		| result |
