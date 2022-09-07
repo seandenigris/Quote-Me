@@ -83,9 +83,14 @@ QuLeTranscriptLineSnippet >> initializeLine [
 	newLine := QuTranscriptLine new
 		contentSnippetID: self uid;
 		yourself.
-		
-	self transcriptable participants size = 1 ifTrue: [ 
-		newLine speaker: self transcriptable participants first ].
+	
+	self transcriptable participants size = 1 
+		ifTrue: [ 
+			newLine speaker: self transcriptable participants first ]
+		ifFalse: [
+			self
+				previousLineSnippetDo: [ :snip | newLine speaker: snip speaker ] 
+				ifNone: [ ] ].
 	self transcriptable transcript lines add: newLine
 ]
 
@@ -141,6 +146,21 @@ QuLeTranscriptLineSnippet >> play [
 { #category : #accessing }
 QuLeTranscriptLineSnippet >> position [
 	^ self line ifNotNil: #position
+]
+
+{ #category : #initialization }
+QuLeTranscriptLineSnippet >> previousLineSnippetDo: aBlock ifNone: noneBlock [
+
+	| atEnd currentSnippet |
+	atEnd := false.
+	currentSnippet := self.
+	
+	[ currentSnippet 
+		previousSnippetDo: [ :snip | 
+			snip class = self class 
+				ifTrue: [ ^ aBlock value: snip ]
+				ifFalse: [ currentSnippet := snip ]  ]
+		ifNone: [ atEnd := true ] ] doWhileFalse: [ atEnd ]
 ]
 
 { #category : #accessing }
