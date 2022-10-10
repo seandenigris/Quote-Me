@@ -50,8 +50,8 @@ QuLeSources >> detectUID: aUID ifNone: noneBlock [
 ]
 
 { #category : #accessing }
-QuLeSources >> gtSpotterProcessorsFor: aSpotterStep [
-	^ self children flatCollect: [ :child | child gtSpotterProcessorsFor: aSpotterStep ]
+QuLeSources >> gtSpotterSearchesInContext: aSpotterContext [
+	^ self children asAsyncStream flatCollect: [ :c | c gtSpotterSearchesInContext: aSpotterContext ]
 ]
 
 { #category : #accessing }

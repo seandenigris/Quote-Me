@@ -58,9 +58,9 @@ QuLeCitedTextSnippet >> detectSourceWithUuid: aString ifNone: noneBlock [
 ]
 
 { #category : #accessing }
-QuLeCitedTextSnippet >> gtSpotterProcessorsFor: aSpotterStep [
+QuLeCitedTextSnippet >> gtSpotterSearchesInContext: aSpotterContext [
 	
-	^ self sourceProviders gtSpotterProcessorsFor: aSpotterStep
+	^ self sourceProviders asAsyncStream flatCollect: [ :c | c gtSpotterSearchesInContext: aSpotterContext ]
 ]
 
 { #category : #accessing }
