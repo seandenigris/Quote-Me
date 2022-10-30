@@ -27,6 +27,20 @@ QuCitation >> location: aLocation [
 	location := aLocation
 ]
 
+{ #category : #viewing }
+QuCitation >> present [
+	self source present.
+]
+
+{ #category : #accessing }
+QuCitation >> presentDescription [
+	<magritteActionDescription>
+	^ MAActionDescription new
+		gtIcon: BrGlamorousVectorIcons playinspect;
+		action: #present;
+		yourself
+]
+
 { #category : #accessing }
 QuCitation >> printOn: aStream [
 
@@ -61,18 +75,4 @@ QuCitation >> sourceDescription [
 { #category : #accessing }
 QuCitation >> sources [
 	^ { self source }
-]
-
-{ #category : #viewing }
-QuCitation >> view [
-	self source view.
-]
-
-{ #category : #accessing }
-QuCitation >> viewDescription [
-	<magritteActionDescription>
-	^ MAActionDescription new
-		gtIcon: BrGlamorousVectorIcons playinspect;
-		action: #view;
-		yourself
 ]
