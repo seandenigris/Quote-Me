@@ -45,15 +45,15 @@ QuLeTranscriptLineSnippetElement >> initialize [
 
 { #category : #accessing }
 QuLeTranscriptLineSnippetElement >> newSearchButton [
-
 	^ GtSpotterDropdownButtonStencil new
 		valuable: [ self snippet page type subjectModel participants ];
 		icon: BrGlamorousVectorIcons search;
-		spotterModelDo: [ :sm |
+		spotterModelDo: [ :sm | 
 			sm announcer
 				when: GtSpotterActOn
 				do: [ :evt | 
-					self snippet line speaker: evt element.
+					GtTranscript default next putObject: evt.
+					self snippet line speaker: evt rawObject.
 					self onSnippetViewModelChanged.
 					evt actedUpon: true.
 					self editorElement requestFocus ] ];
