@@ -52,7 +52,6 @@ QuLeTranscriptLineSnippetElement >> newSearchButton [
 			sm announcer
 				when: GtSpotterActOn
 				do: [ :evt | 
-					GtTranscript default next putObject: evt.
 					self snippet line speaker: evt rawObject.
 					self onSnippetViewModelChanged.
 					evt actedUpon: true.
