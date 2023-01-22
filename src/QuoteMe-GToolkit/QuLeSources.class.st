@@ -20,6 +20,14 @@ QuLeSources class >> providers: anObject [
 ]
 
 { #category : #accessing }
+QuLeSources >> asAsyncStream [
+	
+	^ self providers asAsyncStream
+	
+	"Implemented for streaming GT Spotter integration"
+]
+
+{ #category : #accessing }
 QuLeSources >> children [
 	^ self providers collect: #source
 ]
