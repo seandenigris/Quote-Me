@@ -40,17 +40,13 @@ QuLeCitedSnippetElement >> initialize [
 
 { #category : #accessing }
 QuLeCitedSnippetElement >> newSearchButton [
-
 	^ GtSpotterDropdownButtonStencil new
 		valuable: [ self snippetViewModel snippetModel ];
 		icon: BrGlamorousVectorIcons search;
-		spotterModelDo: [ :sm |
-			sm announcer
-				when: GtSpotterActOn
-				do: [ :evt | 
-					self snippetViewModel snippetModel sourceID: evt element ensureUUID.
-					self onSourceChanged.
-					evt actedUpon: true. ] ];
+		actOn: [ :evt | 
+			self snippetViewModel snippetModel sourceID: evt objectToSend olUID.
+			self onSourceChanged.
+			evt beActed ];
 		create
 ]
 
