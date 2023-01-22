@@ -25,7 +25,7 @@ QuLeTranscriptPageType class >> exampleEmptyPage [
 	| page model transcript |
 	transcript := QuTranscript new.
 	model := Object new.
-	model stub ensureUUID willReturn: 1.
+	model stub olUID willReturn: 1.
 	model stub uuid willReturn: 1.
 	model stub participants willReturn: #('Jack' 'Jill').
 	model stub transcript willReturn: transcript.
