@@ -74,6 +74,19 @@ QuTranscript >> pageID: anObject [
 ]
 
 { #category : #accessing }
+QuTranscript >> snippetsSearchOn: aSearch [
+	<gtSearch>
+	
+	^ aSearch list
+		title: 'Snippets (Text)';
+		items: [ self lepiterPage 
+			ifNotNil: [ :page | page allChildrenTextSnippets ] 
+			ifNil: [ #() ] ];
+		itemName: #text;
+		filterBySubstring
+]
+
+{ #category : #accessing }
 QuTranscript >> subjectModel [
 	^ model
 ]

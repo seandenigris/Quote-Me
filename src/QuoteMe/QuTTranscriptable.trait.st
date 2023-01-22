@@ -39,3 +39,13 @@ QuTTranscriptable >> transcript [
 QuTTranscriptable >> transcript: aQuTranscript [
 	self propertyAt: #transcript putRemovingNil: aQuTranscript
 ]
+
+{ #category : #spotter }
+QuTTranscriptable >> transcriptSearchOn: aSearch [
+	<gtSearch>
+	
+	^ self 
+		propertyAt: #transcript
+		ifPresent: [ :script | script snippetsSearchOn: aSearch ] 
+		ifAbsent: [ aSearch empty ]
+]
