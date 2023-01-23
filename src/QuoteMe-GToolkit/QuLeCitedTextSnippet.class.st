@@ -50,10 +50,10 @@ QuLeCitedTextSnippet >> asSnippetViewModel [
 ]
 
 { #category : #accessing }
-QuLeCitedTextSnippet >> detectSourceWithUuid: aString ifNone: noneBlock [
+QuLeCitedTextSnippet >> detectSourceWithUID: aUid ifNone: noneBlock [
 
 	^ self sourceProviders 
-		detectUID: aString 
+		detectUID: aUid 
 		ifNone: noneBlock
 ]
 
@@ -68,7 +68,7 @@ QuLeCitedTextSnippet >> source [
 	self sourceID ifNil: [ ^ nil ].
 	
 	^ self
-		detectSourceWithUuid: self sourceID 
+		detectSourceWithUID: self sourceID 
 		ifNone: [ nil ]
 ]
 
@@ -78,8 +78,8 @@ QuLeCitedTextSnippet >> sourceID [
 ]
 
 { #category : #accessing }
-QuLeCitedTextSnippet >> sourceID: aString [ 
-	sourceID := aString
+QuLeCitedTextSnippet >> sourceID: aUID [ 
+	sourceID := aUID
 ]
 
 { #category : #accessing }

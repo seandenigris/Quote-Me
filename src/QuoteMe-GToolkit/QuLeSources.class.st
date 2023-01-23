@@ -42,7 +42,7 @@ QuLeSources >> detectUID: aUID ifNone: noneBlock [
 	self providers do: [ :p |
 		| result |
 		result := p 
-			detectUID: [ :uid | uid = aUID ]
+			detectUID: aUID
 			ifNone: [ nil ].
 		result ifNotNil: [ ^ result ] ].
 		
