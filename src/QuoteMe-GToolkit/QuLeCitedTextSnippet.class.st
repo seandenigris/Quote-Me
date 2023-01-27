@@ -39,7 +39,7 @@ QuLeCitedTextSnippet >> addedToParent: aParent [
 	self
 		previousSnippetDo: [ :prevSnip |
 			(prevSnip isKindOf: QuLeCitedTextSnippet) ifFalse: [ ^ self  ].
-			prevSnip source ifNotNil: [ :src | self sourceID: src uuid ] ]
+			prevSnip source ifNotNil: [ :src | self sourceID: src olUID ] ]
 		ifNone: []
 ]
 

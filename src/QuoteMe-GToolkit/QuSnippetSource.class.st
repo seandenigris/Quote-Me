@@ -13,3 +13,9 @@ QuSnippetSource >> detectUID: anLeUID ifNone: noneBlock [
 	]
 		on: KeyNotFound do: noneBlock
 ]
+
+{ #category : #accessing }
+QuSnippetSource >> source [
+
+	^ self
+]
