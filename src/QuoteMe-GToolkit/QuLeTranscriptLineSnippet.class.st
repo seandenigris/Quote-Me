@@ -164,6 +164,12 @@ QuLeTranscriptLineSnippet >> previousLineSnippetDo: aBlock ifNone: noneBlock [
 ]
 
 { #category : #accessing }
+QuLeTranscriptLineSnippet >> quLeSourceText [
+
+	^ (self speaker fullName, ', ', self transcriptable quLeSourceText) asRopedText
+]
+
+{ #category : #accessing }
 QuLeTranscriptLineSnippet >> speaker [
 	^ self line ifNotNil: #speaker
 ]
