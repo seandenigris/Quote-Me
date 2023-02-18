@@ -73,6 +73,15 @@ QuLeCitedTextSnippet >> source [
 ]
 
 { #category : #accessing }
+QuLeCitedTextSnippet >> source: anObject [
+	
+	self sourceID: anObject olUID.
+	
+	(self text isEmpty and: [ anObject isKindOf: LeTextSnippet ])
+		ifTrue: [ self updateText: anObject string asRopedText ]
+]
+
+{ #category : #accessing }
 QuLeCitedTextSnippet >> sourceID [
 	^ sourceID
 ]

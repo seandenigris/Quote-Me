@@ -44,7 +44,7 @@ QuLeCitedSnippetElement >> newSearchButton [
 		valuable: [ self snippetViewModel snippetModel ];
 		icon: BrGlamorousVectorIcons search;
 		actOn: [ :evt | 
-			self snippetViewModel snippetModel sourceID: evt objectToSend olUID.
+			self snippetViewModel snippetModel source: evt objectToSend.
 			self onSourceChanged.
 			evt beActed ];
 		create
