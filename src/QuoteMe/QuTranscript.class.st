@@ -36,7 +36,7 @@ QuTranscript >> gtLiveFor: aView [
 		actionButtonIcon: BrGlamorousVectorIcons inspect
 			tooltip: 'Inspect Transcript'
 			action: [ :aButton :aTab | aButton phlow spawnObject: self ];
-		actionUpdateButtonTooltip: 'Update'.
+		actionUpdateButton.
 ]
 
 { #category : #accessing }
