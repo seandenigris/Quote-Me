@@ -107,13 +107,14 @@ QuLeTranscriptLineSnippet >> line [
 { #category : #accessing }
 QuLeTranscriptLineSnippet >> parent: anObject [
 
-	| isRemoving |
+	| isRemoving transcriptLines |
 	isRemoving := anObject isNil.
 	
 	isRemoving ifTrue: [ 
 		"We must do this before nil-ing out parent because we access the transcript *via that parent*"
 		cachedLine := self line.
-		self transcriptable transcript lines remove: self line ].
+		transcriptLines := self transcriptable transcript lines.
+		(transcriptLines identityIncludes: self line) ifTrue: [ transcriptLines remove: self line ] ].
 
 	super parent: anObject.
 	
