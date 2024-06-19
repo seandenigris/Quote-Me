@@ -41,9 +41,17 @@ QuQuote class >> spData [
 
 { #category : #'instance creation' }
 QuQuote class >> that: person said: aString [
+
 	| source citation |
-	source := QuUnknownSource new author: PeGtSpotterResult; yourself.
-	citation := QuCitation new source: source; yourself.
+	
+	source := QuUnknownSource new 
+		author: person; 
+		yourself.
+		
+	citation := QuCitation new 
+		source: source; 
+		yourself.
+		
 	^ self new
 		content: aString;
 		citation: citation;
