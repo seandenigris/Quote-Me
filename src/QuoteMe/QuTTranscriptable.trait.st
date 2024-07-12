@@ -9,22 +9,6 @@ QuTTranscriptable >> editTranscript [
 ]
 
 { #category : #accessing }
-QuTTranscriptable >> editTranscriptDescription [
-	<magritteActionDescription>
-	^ MAActionDescription new
-		gtAction: [ :action :desc |
-			| button |
-			button := action button
-				icon: BrGlamorousVectorIcons clipboard;
-				yourself.
-			button action: [ :bElem |
-					bElem phlow spawnObject: self editTranscript ].
-			button ];
-		comment: 'View transcript';
-		yourself
-]
-
-{ #category : #accessing }
 QuTTranscriptable >> transcript [
 
 	^ self 
