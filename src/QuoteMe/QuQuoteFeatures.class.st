@@ -1,7 +1,7 @@
 Class {
 	#name : #QuQuoteFeatures,
 	#superclass : #TestCase,
-	#category : 'QuoteMe-Features'
+	#category : #'QuoteMe-Features'
 }
 
 { #category : #tests }
@@ -47,7 +47,7 @@ QuQuoteFeatures >> testWebCitation [
 		source: url;
 		yourself.
 	citation source should equal: url.
-	(DateAndTime now - citation timestamp) should < 1 second
+	(DateAndTime now - citation timestamp) should beLessThan: 1 second
 ]
 
 { #category : #tests }
