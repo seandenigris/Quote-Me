@@ -4,8 +4,9 @@ Trait {
 }
 
 { #category : #accessing }
-QuTTranscriptable >> editTranscript [
-	^ self transcript lepiterPage
+QuTTranscriptable >> hasTranscript [
+
+	^ self transcript hasLepiterPage
 ]
 
 { #category : #accessing }

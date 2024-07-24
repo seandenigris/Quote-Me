@@ -50,6 +50,12 @@ QuTranscript >> gtViewLinesFor: aView [
 ]
 
 { #category : #accessing }
+QuTranscript >> hasLepiterPage [
+
+	^ self pageID isNotNil
+]
+
+{ #category : #accessing }
 QuTranscript >> lines [
 
 	^ lines ifNil: [ lines := SortedCollection sortUsing: #position ascending undefinedFirst ]
