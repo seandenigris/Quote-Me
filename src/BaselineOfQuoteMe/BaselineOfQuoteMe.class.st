@@ -15,20 +15,20 @@ BaselineOfQuoteMe >> baseline: spec [
 
 	spec for: #'common' do: [
 		spec 
-			baseline: 'Mocketry' with: [
+			baseline: #'Mocketry' with: [
 				spec repository: 'github://dionisiydk/Mocketry' ];
-			baseline: 'PharoEnhancements' with: [
+			baseline: #'PharoEnhancements' with: [
 				spec repository: 'github://seandenigris/Pharo-Enhancements' ];
-			baseline: 'SimplePersistence' with: [
+			baseline: #'SimplePersistence' with: [
 				spec repository: 'github://seandenigris/Simple-Persistence' ].
-		spec package: 'QuoteMe' with: [
-				spec requires: #('Mocketry' 'PharoEnhancements' 'SimplePersistence'). ]. ].
+		spec package: #'QuoteMe' with: [
+				spec requires: #(#'Mocketry' #'PharoEnhancements' #'SimplePersistence'). ]. ].
 				
 	spec for: #GToolkit do: [ 
 		spec 
-			baseline: 'ObjectiveLepiter' with: [
+			baseline: #'ObjectiveLepiter' with: [
 				spec repository: 'github://seandenigris/Objective-Lepiter' ].
-		spec package: 'QuoteMe-GToolkit' with: [ spec requires: #(QuoteMe #ObjectiveLepiter) ] ]
+		spec package: #'QuoteMe-GToolkit' with: [ spec requires: #(QuoteMe #ObjectiveLepiter) ] ]
 ]
 
 { #category : #accessing }
