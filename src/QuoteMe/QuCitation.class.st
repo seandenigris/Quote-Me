@@ -14,7 +14,7 @@ Class {
 { #category : #accessing }
 QuCitation >> authors [
 
-	^ self source authors.
+	^ self source authors
 ]
 
 { #category : #accessing }
