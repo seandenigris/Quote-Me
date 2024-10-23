@@ -7,6 +7,6 @@ QuTTranscriptable >> editTranscriptDescription [
 	^ self 
 		editLepiterPageDescriptionSpawning: [ self transcript lepiterPage ]
 		icon: BrGlamorousVectorIcons clipboard
-		deemphasizedUnless: self hasTranscript
+		deemphasizedUnless: [ :obj | obj hasTranscript ]
 		tooltip: 'View transcript'
 ]
