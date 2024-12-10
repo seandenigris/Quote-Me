@@ -9,6 +9,13 @@ QuTTranscriptable >> hasTranscript [
 	^ self transcript hasLepiterPage
 ]
 
+{ #category : #'as yet unclassified' }
+QuTTranscriptable >> postCopyTranscriptable [
+	"Send after super postCopy"
+	
+	self transcript: nil
+]
+
 { #category : #accessing }
 QuTTranscriptable >> transcript [
 
