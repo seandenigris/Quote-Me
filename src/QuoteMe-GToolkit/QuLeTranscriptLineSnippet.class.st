@@ -149,6 +149,11 @@ QuLeTranscriptLineSnippet >> position [
 	^ self line ifNotNil: #position
 ]
 
+{ #category : #accessing }
+QuLeTranscriptLineSnippet >> position: aDateAndTime [
+	^ self line ifNotNil: [ :aLine | aLine position: aDateAndTime ]
+]
+
 { #category : #initialization }
 QuLeTranscriptLineSnippet >> previousLineSnippetDo: aBlock ifNone: noneBlock [
 
