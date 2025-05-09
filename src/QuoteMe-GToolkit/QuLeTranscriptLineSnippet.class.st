@@ -105,6 +105,19 @@ QuLeTranscriptLineSnippet >> line [
 ]
 
 { #category : #accessing }
+QuLeTranscriptLineSnippet >> pageGtViewFor: aView [
+	<gtView>
+	
+	self page ifNil: [ ^ aView empty ].
+	
+	^ aView forward
+		title: 'Page';
+		priority: 1;
+		object: [ self page ];
+		view: #gtLiveFor:
+]
+
+{ #category : #accessing }
 QuLeTranscriptLineSnippet >> parent: anObject [
 
 	| isRemoving transcriptLines |
