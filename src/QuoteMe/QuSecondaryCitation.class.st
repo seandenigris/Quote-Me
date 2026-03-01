@@ -1,13 +1,15 @@
 Class {
-	#name : #QuSecondaryCitation,
-	#superclass : #QuCitation,
+	#name : 'QuSecondaryCitation',
+	#superclass : 'QuCitation',
 	#instVars : [
 		'primarySource'
 	],
-	#category : #'QuoteMe-Core'
+	#category : 'QuoteMe-Core',
+	#package : 'QuoteMe',
+	#tag : 'Core'
 }
 
-{ #category : #magritte }
+{ #category : 'magritte' }
 QuSecondaryCitation >> descriptionPrimarySource [
 	<magritteDescription>
 	
@@ -20,17 +22,17 @@ QuSecondaryCitation >> descriptionPrimarySource [
 		yourself
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 QuSecondaryCitation >> primarySource [
 	^ primarySource
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 QuSecondaryCitation >> primarySource: anObject [
 	primarySource := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 QuSecondaryCitation >> printOn: aStream [
 
 	aStream
@@ -39,7 +41,7 @@ QuSecondaryCitation >> printOn: aStream [
 		print: source
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 QuSecondaryCitation >> sources [
 	^ { self source. self primarySource }
 ]

@@ -1,6 +1,6 @@
-Extension { #name : #Object }
+Extension { #name : 'Object' }
 
-{ #category : #'*QuoteMe-GToolkit' }
+{ #category : '*QuoteMe-GToolkit' }
 Object >> quLeSourceText [
 
 	^ self gtDisplayText

@@ -1,10 +1,12 @@
 Class {
-	#name : #QuLeTranscriptPageElement,
-	#superclass : #PeLePageElement,
-	#category : #'QuoteMe-GToolkit-Transcripts-Lepiter'
+	#name : 'QuLeTranscriptPageElement',
+	#superclass : 'PeLePageElement',
+	#category : 'QuoteMe-GToolkit-Transcripts-Lepiter',
+	#package : 'QuoteMe-GToolkit',
+	#tag : 'Transcripts-Lepiter'
 }
 
-{ #category : #testing }
+{ #category : 'testing' }
 QuLeTranscriptPageElement class >> isClassFor: anLePageToolContentElement [
 
 	^ anLePageToolContentElement headerElement 
@@ -13,12 +15,12 @@ QuLeTranscriptPageElement class >> isClassFor: anLePageToolContentElement [
 		ifNone: [ false ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 QuLeTranscriptPageElement class >> playerElementName [
 	^ #quTranscriptPlayer
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 QuLeTranscriptPageElement >> install [
 	| playerWidget |
 	playerWidget := LlMediaPlayerElement on: self contentElement pageViewModel player.
@@ -29,7 +31,7 @@ QuLeTranscriptPageElement >> install [
 		do: [ :anEvent | anEvent answer: playerWidget player ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 QuLeTranscriptPageElement >> reset [
 	self contentElement headerElement 
 		childNamed: self class playerElementName
@@ -38,7 +40,7 @@ QuLeTranscriptPageElement >> reset [
 			playerElement player: self pageType newPlayer ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 QuLeTranscriptPageElement >> uninstall [
 	| header |
 	self contentElement removeEventHandlersSuchThat: [ :evt | evt eventClass = QuLeTranscriptPlayerRequest ].

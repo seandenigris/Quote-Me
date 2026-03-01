@@ -1,6 +1,6 @@
-Extension { #name : #QuTTranscriptable }
+Extension { #name : 'QuTTranscriptable' }
 
-{ #category : #'*QuoteMe-GToolkit' }
+{ #category : '*QuoteMe-GToolkit' }
 QuTTranscriptable >> editTranscriptDescription [
 	<magritteActionDescription>
 	

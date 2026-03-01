@@ -1,31 +1,33 @@
 Class {
-	#name : #QuWebCitation,
-	#superclass : #QuCitation,
+	#name : 'QuWebCitation',
+	#superclass : 'QuCitation',
 	#instVars : [
 		'name',
 		'timestamp',
 		'cache'
 	],
-	#category : #'QuoteMe-Core'
+	#category : 'QuoteMe-Core',
+	#package : 'QuoteMe',
+	#tag : 'Core'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 QuWebCitation >> authors [
 	self flag: 'What to do here. See super implementation'.
 	^ #()
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 QuWebCitation >> name [
 	^ name
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 QuWebCitation >> name: anObject [
 	name := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 QuWebCitation >> source: url [
 	super source: url.
 	cache := ZnClient new
@@ -34,7 +36,7 @@ QuWebCitation >> source: url [
 	timestamp := DateAndTime now translateToUTC
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 QuWebCitation >> timestamp [
 	^ timestamp
 ]

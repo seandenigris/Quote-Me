@@ -1,13 +1,15 @@
 Class {
-	#name : #QuLeCitedTextSnippet,
-	#superclass : #LeTextSnippet,
+	#name : 'QuLeCitedTextSnippet',
+	#superclass : 'LeTextSnippet',
 	#instVars : [
 		'sourceID'
 	],
-	#category : #'QuoteMe-GToolkit-Citation-Lepiter'
+	#category : 'QuoteMe-GToolkit-Citation-Lepiter',
+	#package : 'QuoteMe-GToolkit',
+	#tag : 'Citation-Lepiter'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 QuLeCitedTextSnippet class >> contextMenuItemSpecification [
 	<leSnippetSpecification>
 	^ LeContextMenuItemSpecification new
@@ -15,25 +17,25 @@ QuLeCitedTextSnippet class >> contextMenuItemSpecification [
 		title: 'Cited Text'
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 QuLeCitedTextSnippet class >> empty [ 
 	^ self new
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 QuLeCitedTextSnippet class >> leJsonV4AttributeMapping [
 	^ super leJsonV4AttributeMapping
 		add: (#sourceID -> #sourceID);
 		yourself 
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 QuLeCitedTextSnippet class >> leJsonV4Name [
 
 	^ 'quCitedTextSnippet'
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 QuLeCitedTextSnippet >> addedToParent: aParent [
 	super addedToParent: aParent.
 	self
@@ -43,13 +45,13 @@ QuLeCitedTextSnippet >> addedToParent: aParent [
 		ifNone: []
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 QuLeCitedTextSnippet >> asSnippetViewModel [
 	<return: #LeSnippetViewModel>
 	^ QuLeCitedSnippetViewModel new snippetModel: self
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 QuLeCitedTextSnippet >> detectSourceWithUID: aUid ifNone: noneBlock [
 
 	^ self sourceProviders 
@@ -57,13 +59,13 @@ QuLeCitedTextSnippet >> detectSourceWithUID: aUid ifNone: noneBlock [
 		ifNone: noneBlock
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 QuLeCitedTextSnippet >> gtSpotterSearchesInContext: aSpotterContext [
 	
 	^ self sourceProviders gtSpotterSearchesInContext: aSpotterContext
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 QuLeCitedTextSnippet >> source [
 	self sourceID ifNil: [ ^ nil ].
 	
@@ -72,7 +74,7 @@ QuLeCitedTextSnippet >> source [
 		ifNone: [ nil ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 QuLeCitedTextSnippet >> source: anObject [
 	
 	self sourceID: anObject olUID.
@@ -81,23 +83,23 @@ QuLeCitedTextSnippet >> source: anObject [
 		ifTrue: [ self updateText: anObject string asRopedText ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 QuLeCitedTextSnippet >> sourceID [
 	^ sourceID
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 QuLeCitedTextSnippet >> sourceID: aUID [ 
 	sourceID := aUID
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 QuLeCitedTextSnippet >> sourceProviders [
 
 	^ QuLeSources new
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 QuLeCitedTextSnippet >> sourceSpotter [
 	^ GtSpotter on: self
 ]

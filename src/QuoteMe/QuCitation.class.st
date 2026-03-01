@@ -2,37 +2,39 @@
 ""A reference to a published or unpublished source (not always the original source)"" - *Wikipedia>https://en.wikipedia.org/wiki/Citation*
 "
 Class {
-	#name : #QuCitation,
-	#superclass : #Object,
+	#name : 'QuCitation',
+	#superclass : 'Object',
 	#instVars : [
 		'source',
 		'location'
 	],
-	#category : #'QuoteMe-Core'
+	#category : 'QuoteMe-Core',
+	#package : 'QuoteMe',
+	#tag : 'Core'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 QuCitation >> authors [
 
 	^ self source authors.
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 QuCitation >> location [
 	^ location
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 QuCitation >> location: aLocation [
 	location := aLocation
 ]
 
-{ #category : #viewing }
+{ #category : 'viewing' }
 QuCitation >> present [
 	self source present.
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 QuCitation >> presentDescription [
 	<magritteActionDescription>
 	^ MAActionDescription new
@@ -41,7 +43,7 @@ QuCitation >> presentDescription [
 		yourself
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 QuCitation >> printOn: aStream [
 
 	source ifNotNil: [ aStream print: source ].
@@ -51,17 +53,17 @@ QuCitation >> printOn: aStream [
 			print: location ].
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 QuCitation >> source [
 	^ source
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 QuCitation >> source: anObject [
 	source := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 QuCitation >> sourceDescription [
 	<magritteDescription>
 	
@@ -72,7 +74,7 @@ QuCitation >> sourceDescription [
 		yourself
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 QuCitation >> sources [
 	^ { self source }
 ]

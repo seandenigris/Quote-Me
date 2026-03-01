@@ -1,6 +1,6 @@
-Extension { #name : #QuTranscript }
+Extension { #name : 'QuTranscript' }
 
-{ #category : #'*QuoteMe-GToolkit' }
+{ #category : '*QuoteMe-GToolkit' }
 QuTranscript >> lepiterPage [
 
 	self pageID ifNil: [ 
@@ -18,7 +18,7 @@ QuTranscript >> lepiterPage [
 	^ nil
 ]
 
-{ #category : #'*QuoteMe-GToolkit' }
+{ #category : '*QuoteMe-GToolkit' }
 QuTranscript >> newLepiterPage [
 	^ LePage quTranscriptOwner: self subjectModel
 ]

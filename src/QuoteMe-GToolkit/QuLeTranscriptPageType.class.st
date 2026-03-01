@@ -4,12 +4,14 @@ The problem with creating an instance is that a particular model object may not 
 Thus, we provide a class-side map for libraries to configure how to construct a reference for a particular class. The configuration can be edited via {{gtMethod:QuLeTransciptPageType class>>#modelReferenceForClass:builder:}}
 "
 Class {
-	#name : #QuLeTranscriptPageType,
-	#superclass : #OlObjectPageType,
-	#category : #'QuoteMe-GToolkit-Transcripts-Lepiter'
+	#name : 'QuLeTranscriptPageType',
+	#superclass : 'OlObjectPageType',
+	#category : 'QuoteMe-GToolkit-Transcripts-Lepiter',
+	#package : 'QuoteMe-GToolkit',
+	#tag : 'Transcripts-Lepiter'
 }
 
-{ #category : #examples }
+{ #category : 'examples' }
 QuLeTranscriptPageType class >> example [
 	<gtExample>
 	^ self exampleEmptyPage
@@ -18,7 +20,7 @@ QuLeTranscriptPageType class >> example [
 		yourself
 ]
 
-{ #category : #examples }
+{ #category : 'examples' }
 QuLeTranscriptPageType class >> exampleEmptyPage [
 	<gtExample>
 	
@@ -40,39 +42,39 @@ QuLeTranscriptPageType class >> exampleEmptyPage [
 	^ page
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 QuLeTranscriptPageType class >> initialize [
 
 	self updatePrimaryDBPageTypes
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 QuLeTranscriptPageType class >> leJsonV4Name [
 
 	^ 'quTranscriptPage'
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 QuLeTranscriptPageType >> asContentUIModel [
 	^ QuLeTranscriptPageViewModel new pageModel: self page
 ]
 
-{ #category : #'api - testing' }
+{ #category : 'api - testing' }
 QuLeTranscriptPageType >> isQuTranscriptPageType [
 	^ true
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 QuLeTranscriptPageType >> newPlayer [
 	^ self subjectModel newPlayer
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 QuLeTranscriptPageType >> pageElementClass [
 	^ QuLeTranscriptPageElement
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 QuLeTranscriptPageType >> printOn: aStream [
 
 	aStream
@@ -80,14 +82,14 @@ QuLeTranscriptPageType >> printOn: aStream [
 		<< (self subjectModel ifNotNil: #printString ifNil: [ '<none>' ])
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 QuLeTranscriptPageType >> snippetBuilder [
 	^ QuLeTranscriptSnippetBuilder new
 		parent: self page;
 		database: self page database.
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 QuLeTranscriptPageType >> title [
 
 	^ self subjectModel 

@@ -1,13 +1,15 @@
 Class {
-	#name : #QuPageCitation,
-	#superclass : #QuCitation,
+	#name : 'QuPageCitation',
+	#superclass : 'QuCitation',
 	#instVars : [
 		'page'
 	],
-	#category : #'QuoteMe-Core'
+	#category : 'QuoteMe-Core',
+	#package : 'QuoteMe',
+	#tag : 'Core'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 QuPageCitation class >> citing: aWork page: aNumber [
 	^ self new
 		source: aWork;
@@ -15,7 +17,7 @@ QuPageCitation class >> citing: aWork page: aNumber [
 		yourself
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 QuPageCitation class >> example [
 	<gtExample>
 	
@@ -31,7 +33,7 @@ QuPageCitation class >> example [
 	
 ]
 
-{ #category : #magritte }
+{ #category : 'magritte' }
 QuPageCitation >> descriptionPage [
 	<magritteDescription>
 	
@@ -42,24 +44,24 @@ QuPageCitation >> descriptionPage [
 		yourself
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 QuPageCitation >> page [
 	^ page
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 QuPageCitation >> page: anObject [
 	page := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 QuPageCitation >> parenthetical [
 	"'Parenthetical referencing, also known as Harvard referencing, has full or partial, in-text, citations enclosed in circular brackets and embedded in the paragraph.' - https://en.wikipedia.org/wiki/Citation"
 	^ String streamContents: [ :s |
 		s << '(' << self source author name lastName << ', p. ' << self page asString << ')' ]
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 QuPageCitation >> printOn: aStream [
 
 	aStream nextPut: $(.

@@ -1,6 +1,6 @@
-Extension { #name : #LeTextSnippet }
+Extension { #name : 'LeTextSnippet' }
 
-{ #category : #'*QuoteMe-GToolkit' }
+{ #category : '*QuoteMe-GToolkit' }
 LeTextSnippet >> citeLinesOnPage: aPage [
 	"Create a cited snippet for each transcript line snippet including the receiver and all its descendents"
 

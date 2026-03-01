@@ -1,6 +1,6 @@
-Extension { #name : #LePage }
+Extension { #name : 'LePage' }
 
-{ #category : #'*QuoteMe-GToolkit' }
+{ #category : '*QuoteMe-GToolkit' }
 LePage class >> quTranscriptOwner: anObject [
 	| result type |
 	result := self new.

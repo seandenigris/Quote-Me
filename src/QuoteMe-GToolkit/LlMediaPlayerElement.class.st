@@ -1,13 +1,15 @@
 Class {
-	#name : #LlMediaPlayerElement,
-	#superclass : #BrHorizontalPane,
+	#name : 'LlMediaPlayerElement',
+	#superclass : 'BrHorizontalPane',
 	#instVars : [
 		'player'
 	],
-	#category : #'QuoteMe-GToolkit-Transcripts-Lepiter'
+	#category : 'QuoteMe-GToolkit-Transcripts-Lepiter',
+	#package : 'QuoteMe-GToolkit',
+	#tag : 'Transcripts-Lepiter'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 LlMediaPlayerElement class >> on: aPlayer [
 
 	^ self new
@@ -15,7 +17,7 @@ LlMediaPlayerElement class >> on: aPlayer [
 		yourself
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 LlMediaPlayerElement >> initialize [
 
 	| buttons toolbar |
@@ -77,19 +79,19 @@ LlMediaPlayerElement >> initialize [
 	^ self.
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 LlMediaPlayerElement >> onRemovedFromSceneGraph [
 	super onRemovedFromSceneGraph.
 	self flag: 'self player quit` doesn''t work because there is no foolproof hook to know when an element is no longer needed. There is also no way to customize the page view model, so for now, we''ll have to quit manually.'
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 LlMediaPlayerElement >> player [
 
 	^ player
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 LlMediaPlayerElement >> player: anObject [
 
 	player := anObject

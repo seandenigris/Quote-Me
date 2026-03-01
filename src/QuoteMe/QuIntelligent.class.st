@@ -1,10 +1,12 @@
 Class {
-	#name : #QuIntelligent,
-	#superclass : #QuQuoteLevel,
-	#category : #'QuoteMe-Core'
+	#name : 'QuIntelligent',
+	#superclass : 'QuQuoteLevel',
+	#category : 'QuoteMe-Core',
+	#package : 'QuoteMe',
+	#tag : 'Core'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 QuIntelligent class >> priority [
 	^ 2
 ]

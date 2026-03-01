@@ -1,19 +1,21 @@
 Class {
-	#name : #QuLeTranscriptLineSnippet,
-	#superclass : #LeTextSnippet,
+	#name : 'QuLeTranscriptLineSnippet',
+	#superclass : 'LeTextSnippet',
 	#instVars : [
 		'cachedLine'
 	],
-	#category : #'QuoteMe-GToolkit-Transcripts-Lepiter'
+	#category : 'QuoteMe-GToolkit-Transcripts-Lepiter',
+	#package : 'QuoteMe-GToolkit',
+	#tag : 'Transcripts-Lepiter'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 QuLeTranscriptLineSnippet class >> empty [
 	"Needed because superclass returns a vanilla text snippet"
 	^ self new
 ]
 
-{ #category : #examples }
+{ #category : 'examples' }
 QuLeTranscriptLineSnippet class >> exampleDumbledore [
 	<gtExample>
 	
@@ -26,7 +28,7 @@ QuLeTranscriptLineSnippet class >> exampleDumbledore [
 	^ result
 ]
 
-{ #category : #examples }
+{ #category : 'examples' }
 QuLeTranscriptLineSnippet class >> exampleHarryPotter [
 	<gtExample>
 	
@@ -39,25 +41,25 @@ QuLeTranscriptLineSnippet class >> exampleHarryPotter [
 	^ result
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 QuLeTranscriptLineSnippet class >> leJsonV4AttributeMapping [
 	^ super leJsonV4AttributeMapping
 		"add: (#lineID -> #lineID);
 		yourself "
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 QuLeTranscriptLineSnippet class >> leJsonV4Name [
 
 	^ 'quTranscriptLineSnippet'
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 QuLeTranscriptLineSnippet >> asSnippetViewModel [
 	^ QuLeTranscriptLineSnippetViewModel new snippetModel: self
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 QuLeTranscriptLineSnippet >> contentAsString [
 	^ String streamContents: [ :str |
 		self position ifNotNil: [ :pos | str << pos quTranscriptPositionGtDisplayText asString << ' ' ].
@@ -65,7 +67,7 @@ QuLeTranscriptLineSnippet >> contentAsString [
 		str << self string ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 QuLeTranscriptLineSnippet >> gtViewLineFor: aView [
 	<gtView>
 	self line ifNil: [ ^ aView empty ].
@@ -76,7 +78,7 @@ QuLeTranscriptLineSnippet >> gtViewLineFor: aView [
 		view: #gtRawFor:
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 QuLeTranscriptLineSnippet >> initializeLine [
 
 	| newLine |
@@ -94,7 +96,7 @@ QuLeTranscriptLineSnippet >> initializeLine [
 	self transcriptable transcript lines add: newLine
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 QuLeTranscriptLineSnippet >> line [
 
 	| subject |
@@ -104,7 +106,7 @@ QuLeTranscriptLineSnippet >> line [
 		ifNone: [ nil ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 QuLeTranscriptLineSnippet >> pageGtViewFor: aView [
 	<gtView>
 	
@@ -117,7 +119,7 @@ QuLeTranscriptLineSnippet >> pageGtViewFor: aView [
 		view: #gtLiveFor:
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 QuLeTranscriptLineSnippet >> parent: anObject [
 
 	| isRemoving transcriptLines |
@@ -152,22 +154,22 @@ QuLeTranscriptLineSnippet >> parent: anObject [
 		^ self ].
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 QuLeTranscriptLineSnippet >> play [
 	^ self page type player currentPosition: self line position
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 QuLeTranscriptLineSnippet >> position [
 	^ self line ifNotNil: #position
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 QuLeTranscriptLineSnippet >> position: aDateAndTime [
 	^ self line ifNotNil: [ :aLine | aLine position: aDateAndTime ]
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 QuLeTranscriptLineSnippet >> previousLineSnippetDo: aBlock ifNone: noneBlock [
 
 	| atEnd currentSnippet |
@@ -182,23 +184,23 @@ QuLeTranscriptLineSnippet >> previousLineSnippetDo: aBlock ifNone: noneBlock [
 		ifNone: [ atEnd := true ] ] doWhileFalse: [ atEnd ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 QuLeTranscriptLineSnippet >> quLeSourceText [
 
 	^ (self speaker fullName, ', ', self transcriptable quLeSourceText) asRopedText
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 QuLeTranscriptLineSnippet >> speaker [
 	^ self line ifNotNil: #speaker
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 QuLeTranscriptLineSnippet >> speaker: aPerson [
 	self line speaker: aPerson
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 QuLeTranscriptLineSnippet >> transcriptable [
 	^ self page type subjectModel
 ]

@@ -1,5 +1,7 @@
 Class {
-	#name : #QuUnknownPage,
-	#superclass : #Object,
-	#category : 'QuoteMe-Core'
+	#name : 'QuUnknownPage',
+	#superclass : 'Object',
+	#category : 'QuoteMe-Core',
+	#package : 'QuoteMe',
+	#tag : 'Core'
 }

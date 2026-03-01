@@ -1,10 +1,11 @@
 Class {
-	#name : #QuSnippetSource,
-	#superclass : #Object,
-	#category : #'QuoteMe-GToolkit'
+	#name : 'QuSnippetSource',
+	#superclass : 'Object',
+	#category : 'QuoteMe-GToolkit',
+	#package : 'QuoteMe-GToolkit'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 QuSnippetSource >> detectUID: anLeUID ifNone: noneBlock [
 
 	^ [ | logicalDB |
@@ -14,7 +15,7 @@ QuSnippetSource >> detectUID: anLeUID ifNone: noneBlock [
 		on: KeyNotFound do: noneBlock
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 QuSnippetSource >> source [
 
 	^ self

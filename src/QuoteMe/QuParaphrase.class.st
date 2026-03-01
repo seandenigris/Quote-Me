@@ -1,10 +1,12 @@
 Class {
-	#name : #QuParaphrase,
-	#superclass : #QuQuoteLevel,
-	#category : #'QuoteMe-Core'
+	#name : 'QuParaphrase',
+	#superclass : 'QuQuoteLevel',
+	#category : 'QuoteMe-Core',
+	#package : 'QuoteMe',
+	#tag : 'Core'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 QuParaphrase class >> priority [
 	^ 1
 ]

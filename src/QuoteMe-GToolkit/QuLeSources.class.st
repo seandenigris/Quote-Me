@@ -1,30 +1,32 @@
 Class {
-	#name : #QuLeSources,
-	#superclass : #Object,
+	#name : 'QuLeSources',
+	#superclass : 'Object',
 	#classVars : [
 		'Providers'
 	],
-	#category : #'QuoteMe-GToolkit-Citation-Lepiter'
+	#category : 'QuoteMe-GToolkit-Citation-Lepiter',
+	#package : 'QuoteMe-GToolkit',
+	#tag : 'Citation-Lepiter'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 QuLeSources class >> providers [
 
 	^ Providers
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 QuLeSources class >> providers: anObject [
 
 	Providers := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 QuLeSources >> children [
 	^ self providers collect: #source
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 QuLeSources >> detectUID: aString ifFound: foundBlock ifNone: noneBlock [
 
 	self providers do: [ :p |
@@ -36,7 +38,7 @@ QuLeSources >> detectUID: aString ifFound: foundBlock ifNone: noneBlock [
 	^ noneBlock value
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 QuLeSources >> detectUID: aUID ifNone: noneBlock [
 
 	self providers do: [ :p |
@@ -49,12 +51,12 @@ QuLeSources >> detectUID: aUID ifNone: noneBlock [
 	^ noneBlock value
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 QuLeSources >> gtSpotterSearchesInContext: aSpotterContext [
 	^ self children asAsyncStream flatCollect: [ :c | c gtSpotterSearchesInContext: aSpotterContext ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 QuLeSources >> providers [
 	^ self class providers
 ]

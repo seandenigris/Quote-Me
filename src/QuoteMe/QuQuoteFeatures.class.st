@@ -1,10 +1,12 @@
 Class {
-	#name : #QuQuoteFeatures,
-	#superclass : #TestCase,
-	#category : #'QuoteMe-Features'
+	#name : 'QuQuoteFeatures',
+	#superclass : 'TestCase',
+	#category : 'QuoteMe-Features',
+	#package : 'QuoteMe',
+	#tag : 'Features'
 }
 
-{ #category : #tests }
+{ #category : 'tests' }
 QuQuoteFeatures >> testCreateQuoteFromUrl [
 
 	| quote content source |
@@ -21,7 +23,7 @@ QuQuoteFeatures >> testCreateQuoteFromUrl [
 	quote content should equal: content.
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 QuQuoteFeatures >> testSecondaryCitation [
 
 	| url citation secondaryCitation primarySource |
@@ -38,7 +40,7 @@ QuQuoteFeatures >> testSecondaryCitation [
 	citation primarySource should equal: primarySource.
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 QuQuoteFeatures >> testWebCitation [
 
 	| url citation |
@@ -50,7 +52,7 @@ QuQuoteFeatures >> testWebCitation [
 	(DateAndTime now - citation timestamp) should beLessThan: 1 second
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 QuQuoteFeatures >> testXxxCreateQuoteWithAuthorAndContent [
 
 	| quote |

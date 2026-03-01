@@ -1,6 +1,6 @@
-Extension { #name : #Duration }
+Extension { #name : 'Duration' }
 
-{ #category : #'*QuoteMe-GToolkit' }
+{ #category : '*QuoteMe-GToolkit' }
 Duration >> quTranscriptPositionGtDisplayText [
 	^ self gtShortPrintString gtDisplayText
 ]

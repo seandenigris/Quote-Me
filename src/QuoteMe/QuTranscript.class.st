@@ -1,16 +1,18 @@
 Class {
-	#name : #QuTranscript,
-	#superclass : #Object,
+	#name : 'QuTranscript',
+	#superclass : 'Object',
 	#instVars : [
 		'lines',
 		'pageID',
 		'model',
 		'titleSource'
 	],
-	#category : #'QuoteMe-Transcripts'
+	#category : 'QuoteMe-Transcripts',
+	#package : 'QuoteMe',
+	#tag : 'Transcripts'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 QuTranscript >> delete [
 	self subjectModel transcript: nil.
 	self subjectModel: nil.
@@ -19,7 +21,7 @@ QuTranscript >> delete [
 	self lepiterPage removeSelf
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 QuTranscript >> gtLiveFor: aView [
 	<gtView>
 
@@ -39,7 +41,7 @@ QuTranscript >> gtLiveFor: aView [
 		actionUpdateButton.
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 QuTranscript >> gtViewLinesFor: aView [
 	<gtView>
 	
@@ -49,37 +51,37 @@ QuTranscript >> gtViewLinesFor: aView [
 		items: [ self lines ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 QuTranscript >> hasLepiterPage [
 
 	^ self pageID isNotNil
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 QuTranscript >> lines [
 
 	^ lines ifNil: [ lines := SortedCollection sortUsing: #position ascending undefinedFirst ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 QuTranscript >> lines: anObject [
 
 	lines := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 QuTranscript >> pageID [
 
 	^ pageID
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 QuTranscript >> pageID: anObject [
 
 	pageID := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 QuTranscript >> snippetsSearchOn: aSearch [
 	<gtSearch>
 	
@@ -92,30 +94,30 @@ QuTranscript >> snippetsSearchOn: aSearch [
 		filterBySubstring
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 QuTranscript >> subjectModel [
 	^ model
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 QuTranscript >> subjectModel: anObject [
 	model := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 QuTranscript >> title [
 	^ self titleSource
 		ifNil: [ self subjectModel displayString ]
 		ifNotNil: [ :ts | ts title ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 QuTranscript >> titleSource [
 	"See setter comment"
 	^ titleSource
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 QuTranscript >> titleSource: anObject [
 	"Title source handles the situation where a higher level object (i.e. one with more metainfo delegates transcripting to a lower level one. For example, an event recording work uses its copy's transcript as its own, but the title should be the work's title, which is more intention revealing"
 	titleSource := anObject

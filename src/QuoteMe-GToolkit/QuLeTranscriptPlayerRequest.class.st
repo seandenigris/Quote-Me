@@ -1,13 +1,15 @@
 Class {
-	#name : #QuLeTranscriptPlayerRequest,
-	#superclass : #BlEvent,
+	#name : 'QuLeTranscriptPlayerRequest',
+	#superclass : 'BlEvent',
 	#instVars : [
 		'action'
 	],
-	#category : #'QuoteMe-GToolkit-Transcripts-Lepiter'
+	#category : 'QuoteMe-GToolkit-Transcripts-Lepiter',
+	#package : 'QuoteMe-GToolkit',
+	#tag : 'Transcripts-Lepiter'
 }
 
-{ #category : #'api - stream' }
+{ #category : 'api - stream' }
 QuLeTranscriptPlayerRequest class >> action: aBlock [
 	
 	^ self new
@@ -15,19 +17,19 @@ QuLeTranscriptPlayerRequest class >> action: aBlock [
 		yourself
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 QuLeTranscriptPlayerRequest >> action [
 
 	^ action
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 QuLeTranscriptPlayerRequest >> action: anObject [
 
 	action := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 QuLeTranscriptPlayerRequest >> answer: player [
 	^ self action value: player
 ]

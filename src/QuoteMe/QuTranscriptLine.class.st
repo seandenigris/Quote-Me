@@ -1,40 +1,42 @@
 Class {
-	#name : #QuTranscriptLine,
-	#superclass : #Object,
+	#name : 'QuTranscriptLine',
+	#superclass : 'Object',
 	#instVars : [
 		'position',
 		'speaker',
 		'contentSnippetID',
 		'type'
 	],
-	#category : #'QuoteMe-Transcripts'
+	#category : 'QuoteMe-Transcripts',
+	#package : 'QuoteMe',
+	#tag : 'Transcripts'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 QuTranscriptLine >> contentSnippetID [
 
 	^ contentSnippetID
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 QuTranscriptLine >> contentSnippetID: aUUID [
 
 	contentSnippetID := aUUID
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 QuTranscriptLine >> position [
 
 	^ position
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 QuTranscriptLine >> position: anObject [
 
 	position := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 QuTranscriptLine >> printOn: aStream [
 	position ifNotNil: [ :obj | aStream print: obj; space ].
 	speaker ifNotNil: [ :obj | aStream print: obj; space ].
@@ -44,7 +46,7 @@ QuTranscriptLine >> printOn: aStream [
 		aStream print: cStr ].
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 QuTranscriptLine >> snippet [
 
 	self contentSnippetID ifNil: [ ^ nil ].
@@ -58,31 +60,31 @@ QuTranscriptLine >> snippet [
 	^ nil
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 QuTranscriptLine >> speaker [
 
 	^ speaker
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 QuTranscriptLine >> speaker: anObject [
 
 	speaker := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 QuTranscriptLine >> type [
 
 	^ type ifNil: [ type := self maLazyInstVarUsing: self typeDescription ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 QuTranscriptLine >> type: anObject [
 
 	type := anObject
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 QuTranscriptLine >> typeDescription [
 	<magritteDescription>
 	

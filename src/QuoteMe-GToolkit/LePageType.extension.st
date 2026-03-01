@@ -1,6 +1,6 @@
-Extension { #name : #LePageType }
+Extension { #name : 'LePageType' }
 
-{ #category : #'*QuoteMe-GToolkit' }
+{ #category : '*QuoteMe-GToolkit' }
 LePageType >> isQuTranscriptPageType [
 	^ false
 ]

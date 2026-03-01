@@ -1,6 +1,6 @@
-Extension { #name : #DateAndTime }
+Extension { #name : 'DateAndTime' }
 
-{ #category : #'*QuoteMe-GToolkit' }
+{ #category : '*QuoteMe-GToolkit' }
 DateAndTime >> quTranscriptPositionGtDisplayText [
 	^ self asTime print24 gtDisplayText
 ]

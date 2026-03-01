@@ -1,1 +1,1 @@
-Package { #name : #'QuoteMe-GToolkit' }
+Package { #name : 'QuoteMe-GToolkit' }

@@ -1,22 +1,24 @@
 Trait {
-	#name : #QuTTranscriptable,
-	#category : #'QuoteMe-Transcripts'
+	#name : 'QuTTranscriptable',
+	#category : 'QuoteMe-Transcripts',
+	#package : 'QuoteMe',
+	#tag : 'Transcripts'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 QuTTranscriptable >> hasTranscript [
 
 	^ self transcript hasLepiterPage
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 QuTTranscriptable >> postCopyTranscriptable [
 	"Send after super postCopy"
 	
 	self transcript: nil
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 QuTTranscriptable >> transcript [
 
 	^ self 
@@ -27,12 +29,12 @@ QuTTranscriptable >> transcript [
 				yourself ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 QuTTranscriptable >> transcript: aQuTranscript [
 	self propertyAt: #transcript putRemovingNil: aQuTranscript
 ]
 
-{ #category : #spotter }
+{ #category : 'spotter' }
 QuTTranscriptable >> transcriptSearchOn: aSearch [
 	<gtSearch>
 	

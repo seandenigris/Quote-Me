@@ -1,16 +1,19 @@
 Class {
-	#name : #QuLeCitedSnippetElement,
-	#superclass : #LeTextCoderSnippetElement,
+	#name : 'QuLeCitedSnippetElement',
+	#superclass : 'LeTextCoderSnippetElement',
 	#instVars : [
 		'snippetToolbar',
-		'sourceLabel'
+		'sourceText'
 	],
-	#category : #'QuoteMe-GToolkit-Citation-Lepiter'
+	#category : 'QuoteMe-GToolkit-Citation-Lepiter',
+	#package : 'QuoteMe-GToolkit',
+	#tag : 'Citation-Lepiter'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 QuLeCitedSnippetElement >> initialize [
 
+	| sourceLabel |
 	super initialize.
 	
 	snippetToolbar := BrHorizontalPane new
@@ -23,22 +26,27 @@ QuLeCitedSnippetElement >> initialize [
 	sourceLabel := BrLabel new
 		aptitude: BrGlamorousLabelAptitude;
 		beSmallSize;
+		text: 'Source:'.
+			
+	sourceText := BrLabel new
+		aptitude: BrGlamorousLabelAptitude;
+		beSmallSize;
 		addEventHandlerOn: BlClickEvent
 			do: [ :evt | 
 				self snippetViewModel snippetModel source 
 					ifNotNil: [ :src | evt target phlow spawnObject: src ] ];
-		text: ''.
+		text: '';
+		constraintsDo: [ :c |
+			"This prevents the button from being pushed off the right edge"
+			c horizontal matchParent ].
 		
 	snippetToolbar
-		addChild: (BrLabel new
-			aptitude: BrGlamorousLabelAptitude;
-			beSmallSize;
-			text: 'Source:');
 		addChild: sourceLabel;
+		addChild: sourceText;
 		addChild: self newSearchButton
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 QuLeCitedSnippetElement >> newSearchButton [
 	^ GtSpotterDropdownButtonStencil new
 		valuable: [ self snippetViewModel snippetModel ];
@@ -50,18 +58,18 @@ QuLeCitedSnippetElement >> newSearchButton [
 		create
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 QuLeCitedSnippetElement >> onSnippetViewModelChanged [
 	self onSourceChanged.
 	super onSnippetViewModelChanged.
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 QuLeCitedSnippetElement >> onSourceChanged [
-	sourceLabel text: self snippetViewModel sourceDisplayText.
+	sourceText text: self snippetViewModel sourceDisplayText.
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 QuLeCitedSnippetElement >> snippetToolbar [
 
 	^ snippetToolbar

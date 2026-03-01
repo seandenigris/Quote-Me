@@ -1,21 +1,23 @@
 Class {
-	#name : #QuLeCitedSnippetViewModel,
-	#superclass : #LeTextCoderSnippetViewModel,
-	#category : #'QuoteMe-GToolkit-Citation-Lepiter'
+	#name : 'QuLeCitedSnippetViewModel',
+	#superclass : 'LeTextCoderSnippetViewModel',
+	#category : 'QuoteMe-GToolkit-Citation-Lepiter',
+	#package : 'QuoteMe-GToolkit',
+	#tag : 'Citation-Lepiter'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 QuLeCitedSnippetViewModel >> snippetElementClass [
 	^ QuLeCitedSnippetElement 
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 QuLeCitedSnippetViewModel >> snippetView [
 
 	^ QuLeCitedSnippetView new snippetElementClass: self snippetElementClass
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 QuLeCitedSnippetViewModel >> sourceDisplayText [
 	self snippetModel source ifNil: [ ^ '' asRopedText ].
 	^ self snippetModel source quLeSourceText.

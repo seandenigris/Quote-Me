@@ -1,32 +1,34 @@
 Class {
-	#name : #QuLeTranscriptLineSnippetViewModel,
-	#superclass : #LeTextCoderSnippetViewModel,
-	#category : #'QuoteMe-GToolkit-Transcripts-Lepiter'
+	#name : 'QuLeTranscriptLineSnippetViewModel',
+	#superclass : 'LeTextCoderSnippetViewModel',
+	#category : 'QuoteMe-GToolkit-Transcripts-Lepiter',
+	#package : 'QuoteMe-GToolkit',
+	#tag : 'Transcripts-Lepiter'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 QuLeTranscriptLineSnippetViewModel >> linePosition [
 	^ self snippetModel line ifNotNil: #position
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 QuLeTranscriptLineSnippetViewModel >> lineSpeaker [
 	^ self snippetModel line ifNotNil: #speaker
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 QuLeTranscriptLineSnippetViewModel >> positionDisplayText [
 	^ self linePosition
 		ifNotNil: [ :obj | obj quTranscriptPositionGtDisplayText ]
 		ifNil: [ '' asRopedText ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 QuLeTranscriptLineSnippetViewModel >> snippetElementClass [
 	^ QuLeTranscriptLineSnippetElement 
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 QuLeTranscriptLineSnippetViewModel >> speakerDisplayText [
 	^ self lineSpeaker
 		ifNotNil: [ :spkr | spkr gtDisplayText ]

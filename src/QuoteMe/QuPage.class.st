@@ -1,13 +1,15 @@
 Class {
-	#name : #QuPage,
-	#superclass : #Object,
+	#name : 'QuPage',
+	#superclass : 'Object',
 	#instVars : [
 		'page'
 	],
-	#category : #'QuoteMe-Core'
+	#category : 'QuoteMe-Core',
+	#package : 'QuoteMe',
+	#tag : 'Core'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 QuPage class >> example [
 	<gtExample>
 	
@@ -24,14 +26,14 @@ QuPage class >> example [
 	
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 QuPage class >> number: aNumber [
 	^ self new
 		page: aNumber;
 		yourself
 ]
 
-{ #category : #magritte }
+{ #category : 'magritte' }
 QuPage >> descriptionPage [
 	<magritteDescription>
 	
@@ -42,24 +44,24 @@ QuPage >> descriptionPage [
 		yourself
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 QuPage >> page [
 	^ page
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 QuPage >> page: anObject [
 	page := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 QuPage >> parenthetical [
 	"'Parenthetical referencing, also known as Harvard referencing, has full or partial, in-text, citations enclosed in circular brackets and embedded in the paragraph.' - https://en.wikipedia.org/wiki/Citation"
 	^ String streamContents: [ :s |
 		s << '(' << self source author name lastName << ', p. ' << self page asString << ')' ]
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 QuPage >> printOn: aStream [
 
 	aStream nextPutAll: 'p. '.

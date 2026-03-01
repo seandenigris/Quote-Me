@@ -1,32 +1,34 @@
 Class {
-	#name : #QuLeTranscriptLineSnippetElement,
-	#superclass : #LeTextCoderSnippetElement,
+	#name : 'QuLeTranscriptLineSnippetElement',
+	#superclass : 'LeTextCoderSnippetElement',
 	#instVars : [
 		'snippetToolbar',
 		'speakerLabel',
 		'positionLabel',
 		'snippetContent'
 	],
-	#category : #'QuoteMe-GToolkit-Transcripts-Lepiter'
+	#category : 'QuoteMe-GToolkit-Transcripts-Lepiter',
+	#package : 'QuoteMe-GToolkit',
+	#tag : 'Transcripts-Lepiter'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 QuLeTranscriptLineSnippetElement >> controlNames [
 	^#(#speakerChooser #timeChooser)
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 QuLeTranscriptLineSnippetElement >> firePlayerRequest: aBlock [
 	self fireEvent: (QuLeTranscriptPlayerRequest action: aBlock)
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 QuLeTranscriptLineSnippetElement >> hideControls [
 	snippetContent ifNil: [ ^ self ].
 	self controlNames do: [ :cName | (snippetContent childNamed: cName) visibility: BlVisibility gone ].
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 QuLeTranscriptLineSnippetElement >> initialize [
 
 	super initialize.
@@ -43,7 +45,7 @@ QuLeTranscriptLineSnippetElement >> initialize [
 					after: [ self hideControls ]]).
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 QuLeTranscriptLineSnippetElement >> newSearchButton [
 	^ GtSpotterDropdownButtonStencil new
 		valuable: [ self snippet page type subjectModel participants ];
@@ -55,17 +57,18 @@ QuLeTranscriptLineSnippetElement >> newSearchButton [
 					self snippet line speaker: evt rawObject.
 					self onSnippetViewModelChanged.
 					evt actedUpon: true.
-					self editorElement requestFocus ] ];
+					self editorElement requestFocus ]
+				for: self ];
 		create
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 QuLeTranscriptLineSnippetElement >> onPositionClicked: evt [
 	self snippetViewModel linePosition ifNotNil: [ :pos | 
 		self firePlayerRequest: [ :player | player currentPosition: pos ] ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 QuLeTranscriptLineSnippetElement >> onSnippetViewModelChanged [
 	
 	super onSnippetViewModelChanged.
@@ -73,7 +76,7 @@ QuLeTranscriptLineSnippetElement >> onSnippetViewModelChanged [
 	speakerLabel text: self snippetViewModel speakerDisplayText.
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 QuLeTranscriptLineSnippetElement >> onSnippetViewModelFocused: aBoolean [
 
 	aBoolean ifFalse: [ ^ self ].
@@ -81,19 +84,19 @@ QuLeTranscriptLineSnippetElement >> onSnippetViewModelFocused: aBoolean [
 	self flag: 'waiting for help on shortcut actions via Discord'.
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 QuLeTranscriptLineSnippetElement >> onTextModified: anEvent [
 	(anEvent text isNotEmpty and: [ self snippetViewModel linePosition isNil ])
 		ifTrue: [ self syncPositionWithPlayer ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 QuLeTranscriptLineSnippetElement >> showControls [
 	snippetContent ifNil: [ ^ self ].
 	self controlNames do: [ :cName | (snippetContent childNamed: cName) visibility: BlVisibility visible ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 QuLeTranscriptLineSnippetElement >> snippetContent [
 	| timeChooser speakerChooser |
 	snippetContent := BrHorizontalPane new
@@ -141,13 +144,13 @@ QuLeTranscriptLineSnippetElement >> snippetContent [
 	^ snippetContent
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 QuLeTranscriptLineSnippetElement >> snippetToolbar [
 
 	^ nil
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 QuLeTranscriptLineSnippetElement >> syncPositionWithPlayer [
 	
 	self fireEvent: (QuLeTranscriptPlayerRequest action: [ :player | 
