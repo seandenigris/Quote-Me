@@ -57,6 +57,14 @@ QuTranscript >> hasLepiterPage [
 	^ self pageID isNotNil
 ]
 
+{ #category : 'as yet unclassified' }
+QuTranscript >> lepiterPageEnsureRemoved [
+
+	self hasLepiterPage ifFalse: [ ^ self ].
+	self lepiterPage removeSelf.
+	self pageID: nil
+]
+
 { #category : 'accessing' }
 QuTranscript >> lines [
 
