@@ -6,10 +6,5 @@ LeTextSnippet >> citeLinesOnPage: aPage [
 
 	| lines |
 	lines := self withAllChildrenBreadthFirst select: [ :chld | chld isKindOf: QuLeTranscriptLineSnippet ].
-	lines do: [ :line | 
-		| citedSnippet |
-		citedSnippet := QuLeCitedTextSnippet empty
-			source: line;
-			yourself.
-		aPage addSnippet: citedSnippet ].
+	lines do: [ :line | line citeEnsuredOnPage: aPage ].
 ]

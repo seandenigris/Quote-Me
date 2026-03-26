@@ -59,6 +59,26 @@ QuLeTranscriptLineSnippet >> asSnippetViewModel [
 	^ QuLeTranscriptLineSnippetViewModel new snippetModel: self
 ]
 
+{ #category : 'citation' }
+QuLeTranscriptLineSnippet >> citeEnsuredOnPage: aPage [
+
+	 aPage allChildrenBreadthFirst
+		detect: [ :existingSnippet |
+			(existingSnippet isKindOf: QuLeCitedTextSnippet) 
+				and: [ existingSnippet source = self ] ]
+		ifNone: [ self citeOnPage: aPage ]
+]
+
+{ #category : 'citation' }
+QuLeTranscriptLineSnippet >> citeOnPage: aPage [
+
+	| citedSnippet |
+	citedSnippet := QuLeCitedTextSnippet empty
+		source: self;
+		yourself.
+	aPage addSnippet: citedSnippet
+]
+
 { #category : 'accessing' }
 QuLeTranscriptLineSnippet >> contentAsString [
 	^ String streamContents: [ :str |
