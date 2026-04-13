@@ -7,6 +7,6 @@ Class {
 }
 
 { #category : 'accessing' }
-QuLeTranscriptSnippetBuilder >> text [
+QuLeTranscriptSnippetBuilder >> empty [
 	^ self ensureSnippetOfClass: QuLeTranscriptLineSnippet
 ]
