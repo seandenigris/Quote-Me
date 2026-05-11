@@ -60,23 +60,11 @@ QuLeTranscriptLineSnippet >> asSnippetViewModel [
 ]
 
 { #category : 'citation' }
-QuLeTranscriptLineSnippet >> citeEnsuredOnPage: aPage [
+QuLeTranscriptLineSnippet >> citationCommand [
 
-	 aPage allChildrenBreadthFirst
-		detect: [ :existingSnippet |
-			(existingSnippet isKindOf: QuLeCitedTextSnippet) 
-				and: [ existingSnippet source = self ] ]
-		ifNone: [ self citeOnPage: aPage ]
-]
-
-{ #category : 'citation' }
-QuLeTranscriptLineSnippet >> citeOnPage: aPage [
-
-	| citedSnippet |
-	citedSnippet := QuLeCitedTextSnippet empty
-		source: self;
-		yourself.
-	aPage addSnippet: citedSnippet
+	^ QuLeCiteOnPage new
+		sourceSnippetsAdd: self;
+		yourself
 ]
 
 { #category : 'accessing' }
@@ -114,6 +102,14 @@ QuLeTranscriptLineSnippet >> initializeLine [
 				previousLineSnippetDo: [ :snip | newLine speaker: snip speaker ] 
 				ifNone: [ ] ].
 	self transcriptable transcript lines add: newLine
+]
+
+{ #category : 'as yet unclassified' }
+QuLeTranscriptLineSnippet >> isCitedOnPage: aPage [
+
+	^ aPage allChildrenBreadthFirst anySatisfy: [ :existingSnippet |
+		(existingSnippet isKindOf: QuLeCitedTextSnippet) 
+			and: [ existingSnippet source = self ] ]
 ]
 
 { #category : 'accessing' }

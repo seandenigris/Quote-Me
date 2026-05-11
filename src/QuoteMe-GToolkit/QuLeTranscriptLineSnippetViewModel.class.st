@@ -6,6 +6,21 @@ Class {
 	#tag : 'Transcripts-Lepiter'
 }
 
+{ #category : 'as yet unclassified' }
+QuLeTranscriptLineSnippetViewModel >> citeOnPageGtActionFor: anAction [
+	<gtAction>
+
+	^ anAction dropdown
+		label: 'Cite on page';
+		icon: BrGlamorousVectorIcons search;
+		target: LeSnippetContextMenuActionTarget uniqueInstance;
+		priority: 10;
+		content: [ :anActionElement :aHostElement :anExplicitMenu |
+			QuLeCiteOnPage new
+				sourceSnippetsAdd: self snippetModel;
+				magritteFormExecuting ]
+]
+
 { #category : 'accessing' }
 QuLeTranscriptLineSnippetViewModel >> linePosition [
 	^ self snippetModel line ifNotNil: #position
