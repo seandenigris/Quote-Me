@@ -46,6 +46,13 @@ QuLeCitedTextSnippet >> addedToParent: aParent [
 ]
 
 { #category : 'accessing' }
+QuLeCitedTextSnippet >> additionalStateForCopying [
+
+	^ super additionalStateForCopying
+		attributeNamed: #sourceID setValue: self sourceID
+]
+
+{ #category : 'accessing' }
 QuLeCitedTextSnippet >> asSnippetViewModel [
 	<return: #LeSnippetViewModel>
 	^ QuLeCitedSnippetViewModel new snippetModel: self
