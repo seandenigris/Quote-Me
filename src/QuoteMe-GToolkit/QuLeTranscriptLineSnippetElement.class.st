@@ -153,7 +153,7 @@ QuLeTranscriptLineSnippetElement >> snippetToolbar [
 { #category : 'accessing' }
 QuLeTranscriptLineSnippetElement >> syncPositionWithPlayer [
 	
-	self fireEvent: (QuLeTranscriptPlayerRequest action: [ :player | 
+	self firePlayerRequest: [ :player | 
 		self snippet line position: player currentPosition.
-		self onSnippetViewModelChanged ])
+		self onSnippetViewModelChanged ]
 ]
