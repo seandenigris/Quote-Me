@@ -8,6 +8,8 @@ Trait {
 { #category : 'accessing' }
 QuTTranscriptable >> hasTranscript [
 
+	(self hasProperty: #transcript) ifFalse: [ ^ false ].
+	
 	^ self transcript hasLepiterPage
 ]
 
