@@ -46,8 +46,9 @@ QuLeCiteOnPage >> ensureCitationOf: aSnippet [
 
 { #category : 'as yet unclassified' }
 QuLeCiteOnPage >> execute [
-	
+
 	| snippetsToAdd |
+	
 	snippetsToAdd := self isTopOfPage
 		ifTrue: [ self sourceSnippets reversed ]
 		ifFalse: [ self sourceSnippets ].

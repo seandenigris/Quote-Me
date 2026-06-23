@@ -40,8 +40,7 @@ QuLeCitedTextSnippet >> addedToParent: aParent [
 	super addedToParent: aParent.
 	self
 		previousSnippetDo: [ :prevSnip |
-			(prevSnip isKindOf: QuLeCitedTextSnippet) ifFalse: [ ^ self  ].
-			prevSnip source ifNotNil: [ :src | self sourceID: src olUID ] ]
+			self sourceEnsureFromSibling: prevSnip ]
 		ifNone: []
 ]
 
@@ -88,6 +87,16 @@ QuLeCitedTextSnippet >> source: anObject [
 	
 	(self text isEmpty and: [ anObject isKindOf: LeTextSnippet ])
 		ifTrue: [ self updateText: anObject string asRopedText ]
+]
+
+{ #category : 'as yet unclassified' }
+QuLeCitedTextSnippet >> sourceEnsureFromSibling: prevSnip [
+
+	self source ifNotNil: [ ^ self ].
+	(prevSnip isKindOf: QuLeCitedTextSnippet) ifFalse: [ ^ self ].
+	prevSnip source ifNil: [ ^ self ].
+  
+	self sourceID: prevSnip source olUID
 ]
 
 { #category : 'accessing' }
