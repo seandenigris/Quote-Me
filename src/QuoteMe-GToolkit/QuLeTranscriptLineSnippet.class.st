@@ -93,15 +93,11 @@ QuLeTranscriptLineSnippet >> contentAsString [
 		str << self string ]
 ]
 
-{ #category : 'accessing' }
-QuLeTranscriptLineSnippet >> gtViewLineFor: aView [
-	<gtView>
-	self line ifNil: [ ^ aView empty ].
-	^ aView forward
-		title: 'Line';
-		priority: 0.5;
-		object: [ self line ];
-		view: #gtRawFor:
+{ #category : 'as yet unclassified' }
+QuLeTranscriptLineSnippet >> gtStringFor: aView [
+	
+	^ (super gtStringFor: aView)
+		priority: 100
 ]
 
 { #category : 'initialization' }
@@ -141,6 +137,17 @@ QuLeTranscriptLineSnippet >> line [
 ]
 
 { #category : 'accessing' }
+QuLeTranscriptLineSnippet >> lineGtViewFor: aView [
+	<gtView>
+	self line ifNil: [ ^ aView empty ].
+	^ aView forward
+		title: 'Line';
+		priority: 5;
+		object: [ self line ];
+		view: #gtRawFor:
+]
+
+{ #category : 'accessing' }
 QuLeTranscriptLineSnippet >> pageGtViewFor: aView [
 	<gtView>
 	
@@ -148,7 +155,7 @@ QuLeTranscriptLineSnippet >> pageGtViewFor: aView [
 	
 	^ aView forward
 		title: 'Page';
-		priority: 1;
+		priority: 7;
 		object: [ self page ];
 		view: #gtLiveFor:
 ]
