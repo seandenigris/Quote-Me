@@ -68,6 +68,24 @@ QuLeTranscriptLineSnippet >> citationCommand [
 ]
 
 { #category : 'accessing' }
+QuLeTranscriptLineSnippet >> citations [
+
+  ^ self database pages select: [ :aPage | self isCitedOnPage: aPage ]
+]
+
+{ #category : 'views' }
+QuLeTranscriptLineSnippet >> citationsGtViewFor: aView [
+  <gtView>
+  
+  ^ aView forward
+      title: 'Citations';
+      priority: 3;
+      object: [ self citations ];
+      inspectButtonFor: [ self citations ];
+      view: #gtItemsFor:
+]
+
+{ #category : 'accessing' }
 QuLeTranscriptLineSnippet >> contentAsString [
 	^ String streamContents: [ :str |
 		self position ifNotNil: [ :pos | str << pos quTranscriptPositionGtDisplayText asString << ' ' ].
