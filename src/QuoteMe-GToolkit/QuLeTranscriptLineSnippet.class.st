@@ -243,5 +243,8 @@ QuLeTranscriptLineSnippet >> speaker: aPerson [
 
 { #category : 'accessing' }
 QuLeTranscriptLineSnippet >> transcriptable [
+	
+	self page ifNil: [ ^ nil ].
+	
 	^ self page type subjectModel
 ]
